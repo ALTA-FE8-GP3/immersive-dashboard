@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { InputGroup, Form, Button, Table, Pagination } from 'react-bootstrap'
 import SubNavbar from '../../components/SubNavbar'
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
+import AddModal from '../../components/AddModal';
 
 const Index = () => {
+
+  // Dont distract
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div style={{ backgroundColor: '#F9F9F9' }}>
@@ -23,7 +29,7 @@ const Index = () => {
               />
             </InputGroup>
             <div style={{ paddingTop: '15px' }}>
-              <Button style={{ width: '300px', backgroundColor: '#F47624', borderColor: '#F47624' }}>Add New Class</Button>
+              <Button onClick={handleShow} style={{ width: '300px', backgroundColor: '#F47624', borderColor: '#F47624' }}>Add New Class</Button>
             </div>
             <div style={{ paddingTop: '30px' }}>
               <Table responsive>
@@ -77,6 +83,13 @@ const Index = () => {
           </div>
         </div>
       </div>
+      {/* Modal */}
+      <AddModal
+        add="class"
+        show={show}
+        handleClose={handleClose}
+        handleShow={handleShow}
+      />
     </div>
   )
 }

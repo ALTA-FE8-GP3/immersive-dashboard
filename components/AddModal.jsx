@@ -1,11 +1,9 @@
 import React from 'react'
 import { Button, Modal, Form, Row, Col } from "react-bootstrap"
 
-const AddModal = ({ handleShow, handleClose, show }) => {
+const AddModal = ({ handleClose, show, add }) => {
 
-    const test = "log"
-
-    const handleTest = (e) => {
+    const handleAdd = (e) => {
         console.log(e.target.value)
     }
 
@@ -15,9 +13,9 @@ const AddModal = ({ handleShow, handleClose, show }) => {
                 <Modal.Header closeButton>
                     <Modal.Title>
                         {
-                            (test === "user" && "Add User") ||
-                            (test === "log" && "Add Log") ||
-                            (test === "class" && "Add Class")
+                            (add === "user" && "Add User") ||
+                            (add === "log" && "Add Log") ||
+                            (add === "class" && "Add Class")
                         }
                     </Modal.Title>
                 </Modal.Header>
@@ -27,7 +25,7 @@ const AddModal = ({ handleShow, handleClose, show }) => {
                     <Modal.Body>
                         {
                             (
-                                test === "user" &&
+                                add === "user" &&
                                 <Row>
                                     <Form.Group className="mb-3 row" controlId="exampleForm.ControlInput1">
                                         <Col xl={2} className="pt-2">
@@ -110,7 +108,7 @@ const AddModal = ({ handleShow, handleClose, show }) => {
                                     </Form.Group>
                                 </Row>
                             ) || (
-                                test === "log" &&
+                                add === "log" &&
                                 <Row>
                                     <Form.Group className="mb-3 row" controlId="exampleForm.ControlInput1">
                                         <Col xl={2} className="pt-2">
@@ -125,7 +123,7 @@ const AddModal = ({ handleShow, handleClose, show }) => {
                                             </Form.Select>
                                         </Col>
                                     </Form.Group>
-                                    <Form.Group onChange={e => handleTest(e)} controlId="formFile" className="mb-3 row">
+                                    <Form.Group onChange={e => handleAdd(e)} controlId="formFile" className="mb-3 row">
                                         <Col xl={2} className="pt-2">
                                             <span>File</span>
                                         </Col>
@@ -142,7 +140,7 @@ const AddModal = ({ handleShow, handleClose, show }) => {
                                     </Form.Group>
                                 </Row>
                             ) || (
-                                test === "class" &&
+                                add === "class" &&
                                 <Row>
                                     <Form.Group className="mb-3 row" controlId="exampleForm.ControlInput1">
                                         <Col xl={2} className="pt-2">

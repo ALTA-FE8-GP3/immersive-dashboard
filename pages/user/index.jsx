@@ -98,6 +98,7 @@ const Index = () => {
 
       {/* Modal */}
       <AddModal
+        add="user"
         show={show}
         handleClose={handleClose}
         handleShow={handleShow}
