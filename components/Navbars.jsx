@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Nav, Container, Navbar, Form, Col } from "react-bootstrap"
+import { Button, Nav, Container, Navbar, Col } from "react-bootstrap"
 import { useCookies } from 'react-cookie';
 import { TbLogout } from "react-icons/tb"
 
@@ -17,7 +17,7 @@ const Navbars = () => {
 
     return (
         <div>
-            { !login ? (
+            {!login ? (
                 <Navbar bg="light" expand="lg" className="shadow-sm navbar">
                     <Container fluid className="align-items-center justify-content-center">
                         <Navbar.Brand href="/" className="ms-5 ps-5 me-0">
@@ -40,12 +40,9 @@ const Navbars = () => {
                                         Class
                                     </Nav.Link>
                                 </Col>
-                                <Nav.Link href="#" className="text-dark">
-                                    {!cookies ? cookies.nama : "John Doe"}
+                                <Nav.Link href="#">
+                                    <TbLogout /> Logout
                                 </Nav.Link>
-                                <Button style={buttonStyle} onClick={() => handleLogout()}>
-                                    <TbLogout size={20} />
-                                </Button>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
