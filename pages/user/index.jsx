@@ -1,27 +1,17 @@
 import React from 'react'
-import { CgProfile } from "react-icons/cg";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
+import SubNavbar from '../../components/SubNavbar';
 
 const Index = () => {
+
   return (
     <div style={{ backgroundColor: '#F9F9F9' }}>
-      <div>Tes</div>
       <div>
-        <h4 style={{ fontSize: '2rem' }} className='px-3'>Immersive Bootcamp</h4>
         <div className='px-3'>
-          <div className='row'>
-            <div className='col-6'>
-              <p style={{ fontSize: '20px' }}>User List</p>
-            </div>
-            <div className='col-6'>
-              <p className='text-end'>
-                <p><CgProfile style={{ fontSize: '40px', paddingRight: '10px' }} /> Hello, (Your name)</p>
-              </p>
-            </div>
-          </div>
-          <div style={{ borderTop: '1px solid #CAC8C8' }}></div>
-          <div style={{ borderTop: '1px solid #CAC8C8', marginTop: '10px' }}></div>
+          <SubNavbar
+            title="User List"
+          />
           <div className='bg-white mt-3 p-4'>
             <div className='input-group flex-nowrap' style={{ width: '300px' }}>
               <span className='input-group-text' id='addon-wrapping' style={{ backgroundColor: '#17345F', color: 'white' }}>Search</span>

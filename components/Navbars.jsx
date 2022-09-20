@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { Button, Nav, Container, Navbar, Col } from "react-bootstrap"
 import { useCookies } from 'react-cookie';
@@ -14,6 +15,12 @@ const Navbars = () => {
     const buttonStyle = {
         backgroundColor: "#F47624",
     }
+    const linkStyle = {
+        color: "#17345F",
+        marginRight: "2rem",
+        textDecoration: "none",
+        marginTop: "10px"
+    }
 
     return (
         <div>
@@ -27,20 +34,20 @@ const Navbars = () => {
                         <Navbar.Collapse id="navbarScroll" className="align-items-center justify-content-center">
                             <Nav className="w-75 d-xl-flex justify-content-between my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
                                 <Col className="w-100 d-flex justify-content-center">
-                                    <Nav.Link href="/dashboard" className="me-3">
-                                        Dashboard
-                                    </Nav.Link>
-                                    <Nav.Link href="mente" className="me-3">
-                                        Mente
-                                    </Nav.Link>
-                                    <Nav.Link href="user" className="me-3">
-                                        User
-                                    </Nav.Link>
-                                    <Nav.Link href="class" className="me-3">
-                                        Class
-                                    </Nav.Link>
+                                    <Link href="/dashboard" className="me-3">
+                                        <a style={linkStyle}>Dashboard</a>
+                                    </Link>
+                                    <Link href="/mente" className="me-3">
+                                        <a style={linkStyle}>Mente</a>
+                                    </Link>
+                                    <Link href="/user" className="me-3">
+                                        <a style={linkStyle}>User</a>
+                                    </Link>
+                                    <Link href="/class" className="me-3">
+                                        <a style={linkStyle}>Class</a>
+                                    </Link>
                                 </Col>
-                                <Nav.Link href="#">
+                                <Nav.Link onClick={handleLogout} href="#">
                                     <TbLogout /> Logout
                                 </Nav.Link>
                             </Nav>
