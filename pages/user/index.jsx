@@ -84,7 +84,7 @@ const Index = () => {
                   <a className='page-link'>Prev</a>
                 </li>
                 <li className='page-item'><a className='page-link' href='#'>1</a></li>
-                <li>
+                <li className='page-item '>
                   <a>2</a>
                 </li>
               </ul>
