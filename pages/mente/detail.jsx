@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Button, Col, Container, Row } from "react-bootstrap"
+import { Badge, Button, Col, Container, Row } from "react-bootstrap"
 import AddModal from "../../components/AddModal";
 import SubNavbar from "../../components/SubNavbar"
 
@@ -47,9 +47,10 @@ const Detail = () => {
                             </Col>
                         </Row>
                         <Row className="shadow-sm py-1 mb-5" style={{ maxHeight: "12rem", minHeight: "12rem" }}>
-                            <Col className="text-end pe-4" xl={3}>
+                            <Col className="text-end pe-4 d-md-flex d-xl-block justify-content-between" xl={3}>
                                 <h5 className="fw-bold">Tatang Suratang</h5>
-                                <span>20 Sept 2022</span>
+                                <p className="mb-5">20 Sept 2022</p>
+                                <Badge bg="danger fs-6 py-md-4 mt-xl-3 pt-xl-2" style={{maxHeight : "10px"}}>Repeat Unit 1</Badge>
                             </Col>
                             <Col className="border-start border-2 mb-5 " xl={9}>
                                 <p>
