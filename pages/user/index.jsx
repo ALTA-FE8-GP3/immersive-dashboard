@@ -2,6 +2,7 @@ import React from 'react'
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import SubNavbar from '../../components/SubNavbar';
+import { Button, Col, Form, InputGroup, Pagination, Row, Table } from 'react-bootstrap';
 
 const Index = () => {
 
@@ -13,15 +14,19 @@ const Index = () => {
             title="User List"
           />
           <div className='bg-white mt-3 p-4'>
-            <div className='input-group flex-nowrap' style={{ width: '300px' }}>
-              <span className='input-group-text' id='addon-wrapping' style={{ backgroundColor: '#17345F', color: 'white' }}>Search</span>
-              <input type='text' className='form-control' placeholder='search here..' aria-label='Search' aria-describedby='addon-wrapping' />
-            </div>
+            <InputGroup style={{ width: '300px' }}>
+              <InputGroup.Text id='basic-addon1' style={{ backgroundColor: '#17345F', color: 'white' }}>Search</InputGroup.Text>
+              <Form.Control
+                placeholder='search here...'
+                aria-label='Search'
+                aria-describedby='basic-addon1'
+              />
+            </InputGroup>
             <div style={{ paddingTop: '15px' }}>
-              <button style={{ width: '300px', backgroundColor: '#F47624', borderColor: '#F47624' }}>Add New User</button>
+              <Button style={{ width: '300px', backgroundColor: '#F47624', borderColor: '#F47624' }}>Add New User</Button>
             </div>
-            <div style={{ paddingTop: '30px' }} className='table-responsive'>
-              <table className='table'>
+            <div style={{ paddingTop: '30px' }}>
+              <Table responsive>
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -66,18 +71,18 @@ const Index = () => {
                     <td><MdDeleteOutline /></td>
                   </tr>
                 </tbody>
-              </table>
+              </Table>
             </div>
-            <div>
-              <ul className='pagination'>
-                <li className='page-item disabled'>
-                  <a className='page-link'>Prev</a>
-                </li>
-                <li className='page-item'><a className='page-link' href='#'>1</a></li>
-                <li className='page-item '>
-                  <a>2</a>
-                </li>
-              </ul>
+            <div className='pt-3'>
+              <Pagination className='justify-content-end'>
+                <Pagination.Prev>Prev</Pagination.Prev>
+                <Pagination.Item>{1}</Pagination.Item>
+                <Pagination.Item>{2}</Pagination.Item>
+                <Pagination.Item active>{3}</Pagination.Item>
+                <Pagination.Item>{4}</Pagination.Item>
+                <Pagination.Item>{5}</Pagination.Item>
+                <Pagination.Next>Next</Pagination.Next>
+              </Pagination>
             </div>
           </div>
         </div>
