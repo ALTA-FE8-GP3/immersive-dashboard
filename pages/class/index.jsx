@@ -22,7 +22,7 @@ const Index = () => {
               />
             </InputGroup>
             <div style={{ paddingTop: '15px' }}>
-              <Button style={{ width: '300px', backgroundColor: '#F47624', borderColor: '#F47624' }}>Add New User</Button>
+              <Button style={{ width: '300px', backgroundColor: '#F47624', borderColor: '#F47624' }}>Add New Class</Button>
             </div>
             <div style={{ paddingTop: '30px' }}>
               <Table responsive>
@@ -50,6 +50,12 @@ const Index = () => {
                   <tr>
                     <td>3</td>
                     <td>Quality Engineering Batch 7</td>
+                    <td><BiEditAlt /></td>
+                    <td><MdDeleteOutline /></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Back End Batch 12</td>
                     <td><BiEditAlt /></td>
                     <td><MdDeleteOutline /></td>
                   </tr>
