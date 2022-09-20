@@ -3,7 +3,11 @@ import { Button, Modal, Form, Row, Col } from "react-bootstrap"
 
 const AddModal = ({ handleShow, handleClose, show }) => {
 
-    const test = "class"
+    const test = "log"
+
+    const handleTest = (e) => {
+        console.log(e.target.value)
+    }
 
     return (
         <>
@@ -114,14 +118,14 @@ const AddModal = ({ handleShow, handleClose, show }) => {
                                         </Col>
                                         <Col xl={10} className="">
                                             <Form.Select aria-label="Default select example">
-                                                <option >Select your status</option>
+                                                <option>Select your status</option>
                                                 <option value="active">Active</option>
                                                 <option value="notActive">Not Active</option>
                                                 <option value="deleted">Deleted</option>
                                             </Form.Select>
                                         </Col>
                                     </Form.Group>
-                                    <Form.Group controlId="formFile" className="mb-3 row">
+                                    <Form.Group onChange={e => handleTest(e)} controlId="formFile" className="mb-3 row">
                                         <Col xl={2} className="pt-2">
                                             <span>File</span>
                                         </Col>

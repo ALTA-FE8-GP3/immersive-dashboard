@@ -5,6 +5,7 @@ import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 
 const Index = () => {
+
   return (
     <div style={{ backgroundColor: '#F9F9F9' }}>
       <div>

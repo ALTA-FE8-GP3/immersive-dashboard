@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import SubNavbar from '../../components/SubNavbar';
-import { Button, Form, InputGroup, Pagination, Row, Table } from 'react-bootstrap';
+import { Button, Form, InputGroup, Pagination, Table } from 'react-bootstrap';
 import AddModal from '../../components/AddModal';
 
 const Index = () => {
