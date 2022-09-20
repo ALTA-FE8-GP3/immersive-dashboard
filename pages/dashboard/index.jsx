@@ -4,7 +4,9 @@ import SubNavbar from '../../components/SubNavbar'
 const Index = () => {
   return (
     <div>
-      <SubNavbar title="Dashboard"/>
+      <div className='px-3'>
+        <SubNavbar title="Dashboard" />
+      </div>
     </div>
   )
 }
