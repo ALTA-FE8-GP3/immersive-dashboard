@@ -17,7 +17,7 @@ const Navbars = () => {
 
     return (
         <div>
-            { login ? (
+            { !login ? (
                 <Navbar bg="light" expand="lg" className="shadow-sm navbar">
                     <Container fluid className="align-items-center justify-content-center">
                         <Navbar.Brand href="/" className="ms-5 ps-5 me-0">
@@ -27,16 +27,16 @@ const Navbars = () => {
                         <Navbar.Collapse id="navbarScroll" className="align-items-center justify-content-center">
                             <Nav className="w-75 d-xl-flex justify-content-between my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
                                 <Col className="w-100 d-flex justify-content-center">
-                                    <Nav.Link href="#action2" className="me-3">
+                                    <Nav.Link href="/dashboard" className="me-3">
                                         Dashboard
                                     </Nav.Link>
-                                    <Nav.Link href="#action2" className="me-3">
+                                    <Nav.Link href="mente" className="me-3">
                                         Mente
                                     </Nav.Link>
-                                    <Nav.Link href="#action2" className="me-3">
+                                    <Nav.Link href="user" className="me-3">
                                         User
                                     </Nav.Link>
-                                    <Nav.Link href="#action2" className="me-3">
+                                    <Nav.Link href="class" className="me-3">
                                         Class
                                     </Nav.Link>
                                 </Col>
