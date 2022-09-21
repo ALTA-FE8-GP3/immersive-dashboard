@@ -1,16 +1,48 @@
 import React, { useState } from 'react'
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
-import SubNavbar from '../../components/SubNavbar';
 import { Button, Form, InputGroup, Pagination, Table } from 'react-bootstrap';
+// Import Components
+import SubNavbar from '../../components/SubNavbar';
 import AddModal from '../../components/AddModal';
+import axios from 'axios';
 
 const Index = () => {
-
   // Dont distract
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  // Initiate State
+  const [edit, setEdit] = useState(false)
+  const [user, setUser] = useState({
+    nama_user: "",
+    email: "",
+    password: "",
+    role: "",
+    team: "",
+    status: ""
+  })
+
+  // handle input 
+  const handleInput = (e) => {
+    let newUser = { ...user }
+    newUser[e.target.name] = e.target.value
+    setUser(newUser)
+  }
+
+  // handle Submit
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post("http://grupproject.site/users", user)
+      .then(() => {
+        alert("Add user successfully")
+        handleClose()
+      }
+      )
+      .catch(err => console.log(err.response.data))
+  }
+
 
   return (
     <>
@@ -102,6 +134,10 @@ const Index = () => {
         show={show}
         handleClose={handleClose}
         handleShow={handleShow}
+        handleInput={handleInput}
+        handleSubmit={handleSubmit}
+        user={user}
+        setEdit={setEdit}
       />
     </>
   )
