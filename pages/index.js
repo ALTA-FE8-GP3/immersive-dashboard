@@ -4,8 +4,10 @@ import Forms from "../components/Forms";
 import React from "react";
 import { setCookie } from "cookies-next";
 import axios from "axios";
+import { useRouter } from "next/router";
 
-const index = () => {
+const Index = () => {
+  const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -31,9 +33,10 @@ const index = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        alert(response.data.Message);
         setCookie("token", response.data.Token);
         setCookie("role", response.data.Role);
+        alert(response.data.Message);
+        router.push("/dashboard")
       })
       .catch(function (error) {
         console.log(error);
@@ -64,11 +67,15 @@ const index = () => {
           />
         </Col>
         <Col xl={6} className="mt-5">
-          <Forms user={user} handleLogin={handleLogin} inputLogin={inputLogin}/>
+          <Forms
+            user={user}
+            handleLogin={handleLogin}
+            inputLogin={inputLogin}
+          />
         </Col>
       </Row>
     </>
   );
 };
 
-export default index;
+export default Index;
