@@ -7,11 +7,6 @@ import { Button, Form, InputGroup, Pagination, Table } from "react-bootstrap";
 import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
 
-// export async function getServerSideProps({ params }) {
-//   const userList = axios.get("http://grupproject.site/users")
-
-// }
-
 const Index = () => {
   // Dont distract
   const [show, setShow] = useState(false);
@@ -19,7 +14,7 @@ const Index = () => {
   const handleShow = () => setShow(true);
 
   // Initiate State
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState();
   const [userList, setUserList] = useState([]);
   const [user, setUser] = useState({
     nama_user: "",
@@ -32,7 +27,7 @@ const Index = () => {
 
   const getApi = () => {
     axios.get("http://grupproject.site/users")
-    .then((res) => setUserList(res.data.Data))
+      .then((res) => setUserList(res.data.Data))
   }
   useEffect(() => {
     getApi()
@@ -47,15 +42,32 @@ const Index = () => {
 
   // handle Submit
   const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post("http://grupproject.site/users", user)
-      .then(() => {
-        alert("Add user successfully");
-        getApi()
-        handleClose();
-      })
-      .catch((err) => console.log(err.response.data));
+    e.preventDefault()
+    if (edit) {
+      axios.put(`http://grupproject.site/users/${edit}`, user)
+        .then(() => {
+          alert("Update user successfully")
+          setEdit(null)
+          getApi()
+          handleClose()
+        })
+        .catch(err => console.log(err.response.data))
+    } else {
+      axios.post("http://grupproject.site/users", user)
+        .then(() => {
+          alert("Add user successfully");
+          getApi()
+          handleClose();
+        })
+        .catch((err) => console.log(err.response.data));
+    }
   };
+
+  // handle Edit
+  const handleEdit = ({ id }) => {
+    handleShow()
+    setEdit(id)
+  }
 
 
 
@@ -116,7 +128,7 @@ const Index = () => {
                           <td>{role}</td>
                           <td>{status}</td>
                           <td>
-                            <BiEditAlt />
+                            <BiEditAlt onClick={() => handleEdit(obj)} />
                           </td>
                           <td>
                             <MdDeleteOutline />
