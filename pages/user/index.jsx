@@ -112,26 +112,23 @@ const Index = () => {
                   </thead>
                   <tbody>
                     {userList.map((obj, index) => {
+                      const { nama_user, email, team, role, status } = obj
                       return (
-                        <p>
-                          {obj.nama_user}
-                        </p>
+                        <tr key={index}>
+                          <td>{nama_user}</td>
+                          <td>{email}</td>
+                          <td>{team}</td>
+                          <td>{role}</td>
+                          <td>{status}</td>
+                          <td>
+                            <BiEditAlt />
+                          </td>
+                          <td>
+                            <MdDeleteOutline />
+                          </td>
+                        </tr>
                       )
                     })}
-                    <tr>
-                      <td>1</td>
-                      <td>Si Pitung</td>
-                      <td>sipitung@mail.com</td>
-                      <td>Mentor</td>
-                      <td>Admin</td>
-                      <td>Active</td>
-                      <td>
-                        <BiEditAlt />
-                      </td>
-                      <td>
-                        <MdDeleteOutline />
-                      </td>
-                    </tr>
                   </tbody>
                 </Table>
               </div>
