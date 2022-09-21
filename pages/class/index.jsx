@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { InputGroup, Form, Button, Table, Pagination } from 'react-bootstrap'
 import SubNavbar from '../../components/SubNavbar'
 import { BiEditAlt } from "react-icons/bi";
@@ -12,12 +12,107 @@ const Index = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [allClass, setAllClass] = useState([]);
+  const [newClass, setNewClass] = useState([]);
+  // const [classId, setClassId] = useState([]);
+  const [editClass, setEditClass] = useState([]);
+
+
+  // Get All Class
+  const getClass = async () => {
+    var axios = require('axios');
+
+    var config = {
+      method: 'get',
+      url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class',
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co'
+      }
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setAllClass(response.data.data);
+        // console.log(allClass.id);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getClass();
+  }, []);
+
+  // Add new class
+  const addNewClass = () => {
+    var axios = require('axios');
+    var data = JSON.stringify({
+      nama_class: newClass
+    });
+
+    var config = {
+      method: 'post',
+      url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class',
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co',
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        getClass();
+        console.log(data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  const handleNewClass = (event) => {
+    setNewClass(event.target.value);
+    console.log(newClass);
+  }
+
+  // Edit Class
+  const handleEditClass = (event) => {
+    setEditClass(event.target.value);
+  }
+  const handleEdit = () => {
+    var axios = require('axios');
+    var data = JSON.stringify({
+      nama_class: editClass
+    });
+
+    var config = {
+      method: 'put',
+      url: `https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class/${id}`,
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co',
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <div style={{ backgroundColor: '#F9F9F9' }}>
       <div>
         <div className='px-3'>
           <SubNavbar
-            title="Class List"
+            title="User List"
           />
           <div className='bg-white mt-3 p-4'>
             <InputGroup style={{ width: '300px' }}>
@@ -32,42 +127,30 @@ const Index = () => {
               <Button onClick={handleShow} style={{ width: '300px', backgroundColor: '#F47624', borderColor: '#F47624' }}>Add New Class</Button>
             </div>
             <div style={{ paddingTop: '30px' }}>
-              <Table responsive>
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>Name</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Front End Batch 8</td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Back End Batch 11</td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Quality Engineering Batch 7</td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Back End Batch 12</td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                </tbody>
-              </Table>
+              {allClass.map((item) => {
+                return (
+                  <Table responsive>
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>{item.nama_class}</td>
+                        <td>
+                          <a onClick={handleShow}><BiEditAlt style={{ color: 'black' }} /></a>
+                        </td>
+                        <td><MdDeleteOutline /></td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                )
+              })}
             </div>
             <div className='pt-3'>
               <Pagination className='justify-content-end'>
@@ -89,6 +172,8 @@ const Index = () => {
         show={show}
         handleClose={handleClose}
         handleShow={handleShow}
+        handleSubmit={(e) => addNewClass(e.target.value)}
+        handleNewClass={handleNewClass}
       />
     </div>
   )

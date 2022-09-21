@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Modal, Form, Row, Col } from "react-bootstrap"
 
-const AddModal = ({ handleClose, show, add }) => {
+const AddModal = ({ handleClose, show, add, handleSubmit, handleNewClass }) => {
 
     const handleAdd = (e) => {
         console.log(e.target.value)
@@ -20,7 +20,7 @@ const AddModal = ({ handleClose, show, add }) => {
                     </Modal.Title>
                 </Modal.Header>
 
-                <Form>
+                <Form onSubmit={handleSubmit}>
 
                     <Modal.Body>
                         {
@@ -151,6 +151,7 @@ const AddModal = ({ handleClose, show, add }) => {
                                                 type="text"
                                                 placeholder="Input Class Name"
                                                 autoFocus
+                                                onChange={(value) => handleNewClass(value)}
                                             />
                                         </Col>
                                     </Form.Group>
@@ -163,7 +164,7 @@ const AddModal = ({ handleClose, show, add }) => {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleClose}>
+                        <Button variant="primary" onClick={handleSubmit}>
                             Save Changes
                         </Button>
                     </Modal.Footer>
