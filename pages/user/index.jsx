@@ -20,7 +20,7 @@ const Index = () => {
 
   // Initiate State
   const [edit, setEdit] = useState(false);
-  // const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState([]);
   const [user, setUser] = useState({
     nama_user: "",
     email: "",
@@ -31,9 +31,8 @@ const Index = () => {
   });
 
   const getApi = () => {
-    let response = null
-    axios.get("http://grupproject.site/users").then(res => console.log(res))
-    console.log(response)
+    axios.get("http://grupproject.site/users")
+    .then((res) => setUserList(res.data.Data))
   }
   useEffect(() => {
     getApi()
@@ -52,6 +51,7 @@ const Index = () => {
     axios.post("http://grupproject.site/users", user)
       .then(() => {
         alert("Add user successfully");
+        getApi()
         handleClose();
       })
       .catch((err) => console.log(err.response.data));
@@ -106,7 +106,7 @@ const Index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {userList.map((obj, index) => {
+                    {userList.map((obj, index) => {
                       const { nama_user, email, team, role, status } = obj
                       return (
                         <tr key={index}>
@@ -123,7 +123,7 @@ const Index = () => {
                           </td>
                         </tr>
                       )
-                    })} */}
+                    })}
                   </tbody>
                 </Table>
               </div>
