@@ -175,7 +175,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                                 type="text"
                                                 placeholder="Input Class Name"
                                                 autoFocus
-                                                onChange={(value) => handleNewClass(value)}
+                                                onChange={(e) => handleInput(e)}
                                             />
                                         </Col>
                                     </Form.Group>
