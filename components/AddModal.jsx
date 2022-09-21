@@ -3,8 +3,6 @@ import { Button, Modal, Form, Row, Col } from "react-bootstrap"
 
 const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, handleNewClass }) => {
 
-    const { nama_user, email, password, role, team, status } = user
-
     const handleTest = (e) => {
         console.log("value : ", e.target.value)
         console.log("name : ", e.target.name)
@@ -182,7 +180,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                                 type="text"
                                                 placeholder="Input Class Name"
                                                 autoFocus
-                                                onChange={(value) => handleNewClass(value)}
+                                                onChange={(e) => handleInput(e)}
                                             />
                                         </Col>
                                     </Form.Group>

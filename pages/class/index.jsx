@@ -5,6 +5,8 @@ import { MdDeleteOutline } from "react-icons/md";
 // Components
 import SubNavbar from '../../components/SubNavbar'
 import AddModal from '../../components/AddModal';
+import { getCookie } from "cookies-next";
+import axios from 'axios';
 
 const Index = () => {
 
@@ -13,32 +15,33 @@ const Index = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [allClass, setAllClass] = useState([]);
-  const [newClass, setNewClass] = useState([]);
-  // const [classId, setClassId] = useState([]);
+  // Initiate State
+  const [allClass, setAllClass] = useState();
+  const [newClass, setNewClass] = useState({
+    nama_class: ""
+  });
   const [editClass, setEditClass] = useState([]);
+  const [idClass, setIdClass] = useState();
 
 
   // Get All Class
   const getClass = async () => {
-    var axios = require('axios');
-
     var config = {
-      method: 'get',
-      url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class',
+      method: "get",
+      url: "https://grupproject.site/class",
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co'
-      }
+        Authorization: `Bearer ${getCookie("token")}`
+      },
     };
 
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        setAllClass(response.data.data);
-        // console.log(allClass.id);
+    await axios(config)
+      .then((response) => {
+        console.log(response.data.Data);
+        setAllClass(response.data.Data);
+        console.log(allClass)
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        console.log(error.response.data);
       });
   };
 
@@ -46,65 +49,84 @@ const Index = () => {
     getClass();
   }, []);
 
-  // Add new class
-  const addNewClass = () => {
-    var axios = require('axios');
-    var data = JSON.stringify({
-      nama_class: newClass
-    });
+  // Add new class & Edit class
+  const handleInput = (e) => {
+    setNewClass(e.target.value);
+    setEditClass(e.target.value);
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (idClass) {
+      var data = {
+        nama_class: editClass
+      };
+      var config = {
+        method: "put",
+        url: `https://grupproject.site/class/${idClass}`,
+        headers: {
+          Authorization: `Bearer ${getCookie("token")}`
+        },
+        data: data
+      };
+
+      axios(config)
+        .then((response) => {
+          alert("Edit class success!");
+          getClass();
+          handleClose();
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    } else {
+      var data = {
+        nama_class: newClass
+      };
+      var config = {
+        method: "post",
+        url: "https://grupproject.site/class",
+        headers: {
+          Authorization: `Bearer ${getCookie("token")}`
+        },
+        data: data
+      };
+
+      axios(config)
+        .then(() => {
+          alert("Add class success!");
+          getClass();
+          handleClose();
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    }
+  };
+
+  const handleEdit = ({ id }) => {
+    handleShow()
+    setIdClass(id)
+  }
+
+  // handle delete
+  const handleDelete = (id) => {
     var config = {
-      method: 'post',
-      url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class',
+      method: "delete",
+      url: `https://grupproject.site/class/${id}`,
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co',
-        'Content-Type': 'application/json'
-      },
-      data: data
+        Authorization: `Bearer ${getCookie("token")}`
+      }
     };
-
     axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
+      .then(() => {
+        console.log(idClass)
+        alert("Class deleted!");
         getClass();
-        console.log(data)
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  const handleNewClass = (event) => {
-    setNewClass(event.target.value);
-    console.log(newClass);
-  }
-
-  // Edit Class
-  const handleEditClass = (event) => {
-    setEditClass(event.target.value);
-  }
-  const handleEdit = () => {
-    var axios = require('axios');
-    var data = JSON.stringify({
-      nama_class: editClass
-    });
-
-    var config = {
-      method: 'put',
-      url: `https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class/${id}`,
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co',
-        'Content-Type': 'application/json'
-      },
-      data: data
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        console.log(error.response.data);
       });
   }
 
@@ -125,33 +147,41 @@ const Index = () => {
               />
             </InputGroup>
             <div style={{ paddingTop: '15px' }}>
-              <Button onClick={handleShow} style={{ width: '300px', backgroundColor: '#F47624', borderColor: '#F47624' }}>Add New Class</Button>
+              <Button
+                onClick={handleShow}
+                style={{
+                  width: '300px',
+                  backgroundColor: '#F47624',
+                  borderColor: '#F47624'
+                }}>
+                Add New Class
+              </Button>
             </div>
             <div style={{ paddingTop: '30px' }}>
-              {allClass.map((item) => {
-                return (
-                  <Table responsive>
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Name</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
+              <Table responsive>
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allClass?.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
                         <td>{item.nama_class}</td>
                         <td>
-                          <a onClick={handleShow}><BiEditAlt style={{ color: 'black' }} /></a>
+                          <a onClick={() => handleEdit(item)}><BiEditAlt style={{ color: 'black' }} /></a>
                         </td>
-                        <td><MdDeleteOutline /></td>
+                        <td><MdDeleteOutline onClick={() => handleDelete(item.id)} /></td>
                       </tr>
-                    </tbody>
-                  </Table>
-                )
-              })}
+                    )
+                  })}
+                </tbody>
+              </Table>
             </div>
             <div className='pt-3'>
               <Pagination className='justify-content-end'>
@@ -173,8 +203,8 @@ const Index = () => {
         show={show}
         handleClose={handleClose}
         handleShow={handleShow}
-        handleSubmit={(e) => addNewClass(e.target.value)}
-        handleNewClass={handleNewClass}
+        handleInput={handleInput}
+        handleSubmit={handleSubmit}
       />
     </div>
   )
