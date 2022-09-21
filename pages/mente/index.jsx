@@ -4,6 +4,7 @@ import SubNavbar from '../../components/SubNavbar'
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { AiFillFolderOpen } from "react-icons/ai";
+import Link from 'next/link';
 
 const Index = () => {
 
@@ -36,7 +37,9 @@ const Index = () => {
               />
             </InputGroup>
             <div style={{ paddingTop: '15px' }}>
-              <Button style={buttonAddStyle}>Add New Mentee</Button>
+              <Button style={buttonAddStyle}>
+              Add New Mentee
+              </Button>
             </div>
             <div className='container px-5 py-4'>
               <Row lg={6} className='justify-content-center text-center'>
