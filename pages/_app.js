@@ -2,8 +2,14 @@ import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Head from 'next/head'
 import Layout from "../components/Layout"
+import axios from 'axios'
 
 function MyApp({ Component, pageProps }) {
+
+  axios.defaults.headers.common = {
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2NjM3NjAzMTcsInVzZXJJZCI6MSwidXNlclJvbGUiOiJBZG1pbiJ9.dn-PzYVJcaKqMxeufNJ1bEAnIt5O7dzVwSNHLSuHhH8`
+  }
+
   return (
     <>
       <Head>
