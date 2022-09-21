@@ -44,6 +44,7 @@ const Index = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (edit) {
+      console.log("put")
       axios.put(`http://grupproject.site/users/${edit}`, user)
         .then(() => {
           alert("Update user successfully")
@@ -52,7 +53,8 @@ const Index = () => {
           handleClose()
         })
         .catch(err => console.log(err.response.data))
-    } else {
+      } else {
+      console.log("post")
       axios.post("http://grupproject.site/users", user)
         .then(() => {
           alert("Add user successfully");
@@ -67,6 +69,16 @@ const Index = () => {
   const handleEdit = ({ id }) => {
     handleShow()
     setEdit(id)
+  }
+
+  // handle Delete
+  const handleDelete = ({id}) => {
+    axios.delete(`http://grupproject.site/users/${id}`)
+    .then(() => {
+      alert("User deleted")
+      getApi()
+    })
+    .catch(err => console.log(err.response.data))
   }
 
 
@@ -122,6 +134,7 @@ const Index = () => {
                       const { nama_user, email, team, role, status } = obj
                       return (
                         <tr key={index}>
+                          <td>{index + 1}</td>
                           <td>{nama_user}</td>
                           <td>{email}</td>
                           <td>{team}</td>
@@ -131,7 +144,7 @@ const Index = () => {
                             <BiEditAlt onClick={() => handleEdit(obj)} />
                           </td>
                           <td>
-                            <MdDeleteOutline />
+                            <MdDeleteOutline onClick={() => handleDelete(obj)}/>
                           </td>
                         </tr>
                       )
