@@ -2,12 +2,15 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { Button, Nav, Container, Navbar, Col } from "react-bootstrap"
 import { TbLogout } from "react-icons/tb"
+import { hasCookie } from "cookies-next"
+import { useRouter } from 'next/router';
 
 const Navbars = () => {
-    // test
-    const [login, setLogin] = useState(false)
+    const router = useRouter()
+
     const handleLogout = () => {
-        setLogin((prev) => !prev)
+        deleteCookie("token")
+        router.push("/")
     }
 
     const buttonStyle = {
@@ -22,7 +25,7 @@ const Navbars = () => {
 
     return (
         <div>
-            {!login ? (
+            {hasCookie("token") ? (
                 <Navbar bg="light" expand="lg" className="shadow-sm navbar">
                     <Container fluid className="d-md-flex align-items-center justify-content-between">
                         <Navbar.Brand href="/" className="ms-5 ps-5 me-0">
@@ -54,9 +57,6 @@ const Navbars = () => {
                 </Navbar>
             ) : (
                 <>
-                    <Button style={buttonStyle} onClick={() => handleLogout()}>
-                        <TbLogout size={20} />
-                    </Button>
                 </>
             )}
         </div >

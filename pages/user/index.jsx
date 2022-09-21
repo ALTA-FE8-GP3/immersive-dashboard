@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { Button, Form, InputGroup, Pagination, Table } from "react-bootstrap";
 // Import Components
 import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
-import axios from "axios";
-import { getCookie } from "cookies-next";
 
 const Index = () => {
   // Dont distract
@@ -16,7 +15,7 @@ const Index = () => {
 
   // Initiate State
   const [edit, setEdit] = useState(false);
-  const [userList, setUserList] = useState();
+  const [userList, setUserList] = useState([]);
   const [user, setUser] = useState({
     nama_user: "",
     email: "",
@@ -45,27 +44,21 @@ const Index = () => {
       .catch((err) => console.log(err.response.data));
   };
 
-  console.log(getCookie("token"));
-
   const getUser = async () => {
     var config = {
       method: "get",
-      url: "http://grupproject.site/users",
-      headers: {
-        Authorization: `Bearer ${getCookie("token")}`,
-      },
+      url: "http://grupproject.site/users"
     };
 
     await axios(config)
       .then((response) => {
-        console.log(response.data.Data);
+        console.log(response.data)
         setUserList(response.data.Data);
       })
       .catch((error) => {
         console.log(error.response.data);
       });
   };
-  console.log(userList[0].nama);
 
   useEffect(() => {
     getUser();
@@ -118,6 +111,13 @@ const Index = () => {
                     </tr>
                   </thead>
                   <tbody>
+                    {userList.map((obj, index) => {
+                      return (
+                        <p>
+                          {obj.nama_user}
+                        </p>
+                      )
+                    })}
                     <tr>
                       <td>1</td>
                       <td>Si Pitung</td>
@@ -132,24 +132,6 @@ const Index = () => {
                         <MdDeleteOutline />
                       </td>
                     </tr>
-                    {userList.map((item) => {
-                      return (
-                        <tr>
-                          <td>{item.id}</td>
-                          <td>{item.nama_user}</td>
-                          <td>{item.email}</td>
-                          <td>{item.team}</td>
-                          <td>{item.role}</td>
-                          <td>{item.status}</td>
-                          <td>
-                            <BiEditAlt />
-                          </td>
-                          <td>
-                            <MdDeleteOutline />
-                          </td>
-                        </tr>
-                      );
-                    })}
                   </tbody>
                 </Table>
               </div>

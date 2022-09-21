@@ -39,6 +39,7 @@ const Index = () => {
         router.push("/dashboard")
       })
       .catch(function (error) {
+        alert("Email / Password salah")
         console.log(error);
       });
   };
