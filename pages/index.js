@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const Index = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -36,7 +36,7 @@ const Index = () => {
         setCookie("token", response.data.Token);
         setCookie("role", response.data.Role);
         alert(response.data.Message);
-        router.push("/dashboard")
+        location.href="/dashboard"
       })
       .catch(function (error) {
         alert("Email / Password salah")

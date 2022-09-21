@@ -25,17 +25,12 @@ const Index = () => {
 
     var config = {
       method: 'get',
-      url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class',
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co'
-      }
+      url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class'
     };
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         setAllClass(response.data.data);
-        // console.log(allClass.id);
       })
       .catch(function (error) {
         console.log(error);
@@ -57,7 +52,6 @@ const Index = () => {
       method: 'post',
       url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class',
       headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co',
         'Content-Type': 'application/json'
       },
       data: data
@@ -65,9 +59,7 @@ const Index = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         getClass();
-        console.log(data)
       })
       .catch(function (error) {
         console.log(error);
@@ -76,7 +68,6 @@ const Index = () => {
 
   const handleNewClass = (event) => {
     setNewClass(event.target.value);
-    console.log(newClass);
   }
 
   // Edit Class
@@ -92,10 +83,6 @@ const Index = () => {
     var config = {
       method: 'put',
       url: `https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class/${id}`,
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co',
-        'Content-Type': 'application/json'
-      },
       data: data
     };
 
@@ -113,7 +100,7 @@ const Index = () => {
       <div>
         <div className='px-3'>
           <SubNavbar
-            title="User List"
+            title="Class List"
           />
           <div className='bg-white mt-3 p-4'>
             <InputGroup style={{ width: '300px' }}>

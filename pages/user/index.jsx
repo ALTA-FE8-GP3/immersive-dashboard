@@ -7,6 +7,11 @@ import { Button, Form, InputGroup, Pagination, Table } from "react-bootstrap";
 import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
 
+// export async function getServerSideProps({ params }) {
+//   const userList = axios.get("http://grupproject.site/users")
+
+// }
+
 const Index = () => {
   // Dont distract
   const [show, setShow] = useState(false);
@@ -15,7 +20,7 @@ const Index = () => {
 
   // Initiate State
   const [edit, setEdit] = useState(false);
-  const [userList, setUserList] = useState([]);
+  // const [userList, setUserList] = useState([]);
   const [user, setUser] = useState({
     nama_user: "",
     email: "",
@@ -24,6 +29,15 @@ const Index = () => {
     team: "",
     status: "",
   });
+
+  const getApi = () => {
+    let response = null
+    axios.get("http://grupproject.site/users").then(res => console.log(res))
+    console.log(response)
+  }
+  useEffect(() => {
+    getApi()
+  }, [])
 
   // handle input
   const handleInput = (e) => {
@@ -35,8 +49,7 @@ const Index = () => {
   // handle Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://grupproject.site/users", user)
+    axios.post("http://grupproject.site/users", user)
       .then(() => {
         alert("Add user successfully");
         handleClose();
@@ -44,25 +57,7 @@ const Index = () => {
       .catch((err) => console.log(err.response.data));
   };
 
-  const getUser = async () => {
-    var config = {
-      method: "get",
-      url: "http://grupproject.site/users"
-    };
 
-    await axios(config)
-      .then((response) => {
-        console.log(response.data)
-        setUserList(response.data.Data);
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
 
   return (
     <>
@@ -111,7 +106,7 @@ const Index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.map((obj, index) => {
+                    {/* {userList.map((obj, index) => {
                       const { nama_user, email, team, role, status } = obj
                       return (
                         <tr key={index}>
@@ -128,7 +123,7 @@ const Index = () => {
                           </td>
                         </tr>
                       )
-                    })}
+                    })} */}
                   </tbody>
                 </Table>
               </div>

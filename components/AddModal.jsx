@@ -3,13 +3,6 @@ import { Button, Modal, Form, Row, Col } from "react-bootstrap"
 
 const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, handleNewClass }) => {
 
-    const { nama_user, email, password, role, team, status } = user
-
-    const handleTest = (e) => {
-        console.log("value : ", e.target.value)
-        console.log("name : ", e.target.name)
-    }
-
     return (
         <>
             <Modal show={show} onHide={handleClose}>
@@ -36,7 +29,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                         <Col xl={10} className="">
                                             <Form.Control
                                                 name="nama_user"
-                                                value={nama_user}
+                                                // value={nama_user}
                                                 onChange={(e) => handleInput(e)}
                                                 type="text"
                                                 placeholder="Input your username"
@@ -51,7 +44,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                         <Col xl={10} className="">
                                             <Form.Control
                                                 name="email"
-                                                value={email}
+                                                // value={email}
                                                 onChange={(e) => handleInput(e)}
                                                 type="email"
                                                 placeholder="Input your email"
@@ -68,7 +61,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                         <Col xl={10} className="">
                                             <Form.Control
                                                 name="password"
-                                                value={password}
+                                                // value={password}
                                                 onChange={(e) => handleInput(e)}
                                                 autoComplete="on"
                                                 type="password"

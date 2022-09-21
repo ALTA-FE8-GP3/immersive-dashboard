@@ -1,11 +1,18 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { Button, Nav, Container, Navbar, Col } from "react-bootstrap"
+import React, { useEffect, useState } from 'react';
+import { Nav, Container, Navbar, Col } from "react-bootstrap"
 import { TbLogout } from "react-icons/tb"
-import { hasCookie } from "cookies-next"
+import { getCookie, deleteCookie } from "cookies-next"
 import { useRouter } from 'next/router';
 
 const Navbars = () => {
+    const [token, setToken] = useState()
+    useEffect(() => {
+        setToken(getCookie("token"))
+    }, [])
+
+    console.log(token)
+
     const router = useRouter()
 
     const handleLogout = () => {
@@ -25,7 +32,7 @@ const Navbars = () => {
 
     return (
         <div>
-            {hasCookie("token") ? (
+            {(token &&
                 <Navbar bg="light" expand="lg" className="shadow-sm navbar">
                     <Container fluid className="d-md-flex align-items-center justify-content-between">
                         <Navbar.Brand href="/" className="ms-5 ps-5 me-0">
@@ -48,17 +55,17 @@ const Navbars = () => {
                                         <a style={linkStyle}>Class</a>
                                     </Link>
                                 </Col>
-                                <Nav.Link onClick={handleLogout} href="#">
+                                <Nav.Link onClick={handleLogout} href="/">
                                     <TbLogout /> Logout
                                 </Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-            ) : (
-                <>
-                </>
-            )}
+            ) || (!token &&
+                <></>
+                )
+            }
         </div >
     );
 };
