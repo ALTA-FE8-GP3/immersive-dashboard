@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { Button, Nav, Container, Navbar, Col } from "react-bootstrap"
-import { useCookies } from 'react-cookie';
 import { TbLogout } from "react-icons/tb"
 
 const Navbars = () => {
     // test
     const [login, setLogin] = useState(false)
-    const [cookies, removeCookies] = useCookies();
     const handleLogout = () => {
         setLogin((prev) => !prev)
     }

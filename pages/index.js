@@ -1,8 +1,12 @@
+import { useState } from "react"
 import { Row, Col } from "react-bootstrap"
 import Forms from "../components/Forms"
 
 const index = () => {
 
+  const [user, setUser] = useState()
+
+  
 
   return (
     <>
@@ -11,7 +15,9 @@ const index = () => {
           <img src="/logo.png" alt="pazarLogo" className=" d-block mx-auto" style={{ marginTop: "4rem", width: "60%" }} />
         </Col>
         <Col xl={6} className="mt-5">
-          <Forms />
+          <Forms
+            user={user}
+          />
         </Col>
       </Row>
     </>

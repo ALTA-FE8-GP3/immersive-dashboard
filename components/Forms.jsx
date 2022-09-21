@@ -1,11 +1,8 @@
 // Import Library
 import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { useCookies } from "react-cookie";
 
 const Forms = () => {
-
-    const [setCookies] = useCookies()
 
     const spanStyle = {
         color: "#17345F",

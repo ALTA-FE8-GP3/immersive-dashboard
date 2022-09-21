@@ -1,16 +1,19 @@
+// Import Library
 import React from 'react'
-import { Col, Row, Card } from 'react-bootstrap'
-import SubNavbar from '../../components/SubNavbar'
+import { Col, Row, Card, Button } from 'react-bootstrap'
 import { BsFillPersonXFill, BsFillPersonCheckFill } from "react-icons/bs"
 import { TbRepeat } from "react-icons/tb"
+// Import Components
+import SubNavbar from '../../components/SubNavbar'
 
 const Index = () => {
+  // Initiate style
   const iconCheck = <BsFillPersonCheckFill color='#2CAF32' size={50} />
   const iconX = <BsFillPersonXFill color="#FE5462" size={50} />
   const iconRepeat = <TbRepeat color='white' size={50} />
-  const checkStyle = { color: '#2CAF32', backgroundColor: "#17345F",cursor : "pointer" }
-  const xStyle = { color: "#FE5462", backgroundColor: "#17345F",cursor : "pointer" }
-  const repeatStyle = { color: 'white', backgroundColor: "#F47624",cursor : "pointer" }
+  const checkStyle = { color: '#2CAF32', backgroundColor: "#17345F", cursor: "pointer" }
+  const xStyle = { color: "#FE5462", backgroundColor: "#17345F", cursor: "pointer" }
+  const repeatStyle = { color: 'white', backgroundColor: "#F47624", cursor: "pointer" }
 
   return (
     <div>
