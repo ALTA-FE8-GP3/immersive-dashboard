@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, InputGroup, Button, Row, Col, DropdownButton, Dropdown, Table, Pagination } from 'react-bootstrap'
 import SubNavbar from '../../components/SubNavbar'
 import { BiEditAlt } from "react-icons/bi";
@@ -7,6 +7,8 @@ import { AiFillFolderOpen } from "react-icons/ai";
 import Router from 'next/router';
 
 const Index = () => {
+
+  const [allClass, setAllClass] = useState([]);
 
   const buttonAddStyle = {
     width: '300px',
@@ -26,6 +28,33 @@ const Index = () => {
     }
     )
   }
+
+  // Get All Class
+  const getClass = async () => {
+    var axios = require('axios');
+
+    var config = {
+      method: 'get',
+      url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class',
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co'
+      }
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        setAllClass(response.data.data);
+        console.log(allClass)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getClass();
+  }, []);
 
   return (
     <div style={{ backgroundColor: '#F9F9F9' }}>
