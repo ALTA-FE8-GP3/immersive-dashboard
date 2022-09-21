@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import Forms from "../components/Forms";
 import React from "react";
-import { setCookie } from "cookies-next";
+import { setCookie, getCookie } from "cookies-next";
 import axios from "axios";
-import { useRouter } from "next/router";
 
 const Index = () => {
-  // const router = useRouter();
+  const [role, setRole] = useState()
+  useEffect(() => {
+    setRole(getCookie("role"))
+  })
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -32,15 +34,14 @@ const Index = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
         setCookie("token", response.data.Token);
         setCookie("role", response.data.Role);
-        alert(response.data.Message);
-        location.href="/dashboard"
+        alert(`Login as ${role}`);
+        location.href = "/dashboard"
       })
       .catch(function (error) {
         alert("Email / Password salah")
-        console.log(error);
+        console.log(error.response.data);
       });
   };
 
@@ -62,7 +63,7 @@ const Index = () => {
         <Col xl={6}>
           <img
             src="/logo.png"
-            alt="pazarLogo"
+            alt="Logo"
             className=" d-block mx-auto"
             style={{ marginTop: "4rem", width: "60%" }}
           />

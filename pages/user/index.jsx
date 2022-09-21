@@ -3,6 +3,7 @@ import axios from "axios";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { Button, Form, InputGroup, Pagination, Table } from "react-bootstrap";
+import { getCookie } from "cookies-next"
 // Import Components
 import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
@@ -14,6 +15,7 @@ const Index = () => {
   const handleShow = () => setShow(true);
 
   // Initiate State
+  const ROLE = getCookie("role")
   const [edit, setEdit] = useState();
   const [userList, setUserList] = useState([]);
   const [user, setUser] = useState({
@@ -53,7 +55,7 @@ const Index = () => {
           handleClose()
         })
         .catch(err => console.log(err.response.data))
-      } else {
+    } else {
       console.log("post")
       axios.post("http://grupproject.site/users", user)
         .then(() => {
@@ -72,13 +74,13 @@ const Index = () => {
   }
 
   // handle Delete
-  const handleDelete = ({id}) => {
+  const handleDelete = ({ id }) => {
     axios.delete(`http://grupproject.site/users/${id}`)
-    .then(() => {
-      alert("User deleted")
-      getApi()
-    })
-    .catch(err => console.log(err.response.data))
+      .then(() => {
+        alert("User deleted")
+        getApi()
+      })
+      .catch(err => console.log(err.response.data))
   }
 
 
@@ -140,12 +142,16 @@ const Index = () => {
                           <td>{team}</td>
                           <td>{role}</td>
                           <td>{status}</td>
-                          <td>
-                            <BiEditAlt onClick={() => handleEdit(obj)} />
-                          </td>
-                          <td>
-                            <MdDeleteOutline onClick={() => handleDelete(obj)}/>
-                          </td>
+                          {ROLE === "Admin" ?
+                            <>
+                              <td>
+                                <BiEditAlt onClick={() => handleEdit(obj)} />
+                              </td>
+                              <td>
+                                <MdDeleteOutline onClick={() => handleDelete(obj)} />
+                              </td>
+                            </> : <></>
+                          }
                         </tr>
                       )
                     })}

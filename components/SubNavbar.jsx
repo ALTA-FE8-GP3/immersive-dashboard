@@ -1,8 +1,14 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
+import { getCookie } from "cookies-next"
 import { CgProfile } from "react-icons/cg";
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Badge } from "react-bootstrap"
 
 const SubNavbar = ({ title }) => {
+    const [role, setRole] = useState()
+    useEffect(() => {
+        setRole(getCookie("role"))
+    }, [])
+
     return (
         <>
             <Container fluid className="pt-3">
@@ -13,6 +19,7 @@ const SubNavbar = ({ title }) => {
                     </Col>
                     <Col xl={6}>
                         <p className="text-end"><CgProfile style={{ fontSize: '40px', paddingRight: '10px' }} /> Hello, (Your name)</p>
+                        <Badge bg={role === "Admin" ? "success" : "info"} className="float-end">{role}</Badge>
                     </Col>
                 </Row>
                 <hr /> <hr />
