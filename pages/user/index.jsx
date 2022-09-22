@@ -3,7 +3,7 @@ import axios from "axios";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr"
-import { Button, Form, InputGroup, Table } from "react-bootstrap";
+import { Badge, Button, Form, InputGroup, Table } from "react-bootstrap";
 import { getCookie } from "cookies-next";
 // Import Components
 import "../../styles/Home.module.css"
@@ -99,7 +99,7 @@ const Index = () => {
     <>
       <div >
         <div>
-          <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{minHeight : "120vh"}}>
+          <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{ minHeight: "120vh" }}>
             <SubNavbar title="User List" />
             <div className={`mt-3 p-4 ${isDark ? "bg-dark text-white" : ''} `}>
               <InputGroup style={{ width: "300px" }}>
@@ -156,7 +156,14 @@ const Index = () => {
                           <td>{email}</td>
                           <td>{team}</td>
                           <td>{role}</td>
-                          <td>{status}</td>
+                          <td><Badge
+                            bg={status === "Active" && "success" ||
+                              status === "Not Active" && "warning" ||
+                              status === "Deleted" && "danger"
+                            }
+                          >
+                            {status}
+                          </Badge></td>
                           {ROLE === "Admin" ? (
                             <>
                               <td>
