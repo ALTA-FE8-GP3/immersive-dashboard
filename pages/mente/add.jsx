@@ -1,8 +1,85 @@
-import React from 'react'
+import axios from 'axios';
+import { Router } from 'next/router';
+import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import SubNavbar from '../../components/SubNavbar'
 
 const Add = () => {
+    // Initiate State
+    const [editMente, setEditMente] = useState();
+    const [mentee, setMentee] = useState({
+        nama_mentee: "",
+        address: "",
+        home_address: "",
+        email: "",
+        gender: "",
+        telegram: "",
+        phone: "",
+        discord: "",
+        nama_emergency: "",
+        phone_emergency: "",
+        status_emergency: "",
+        type: "",
+        major: "",
+        graduate: "",
+        status: "",
+        id_class: ""
+    });
+
+    const goBack = () => {
+        Router.push({
+            pathname: "/mente"
+        })
+    }
+
+    // handle Input
+    const handleInput = (e) => {
+        let newMentee = { ...mentee };
+        newMentee[e.target.name] = e.target.value;
+        setMentee(newMentee);
+    };
+
+    // handle Submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (editMente) {
+            axios
+                .put("endpoint url", mentee)
+                .then(() => {
+                    alert("Update data mentee success!");
+                    setEditMente(null);
+                    // handle fetch API mentee
+                    goBack();
+                })
+                .catch((err) => console.log(err.response.data));
+        } else {
+            axios
+                .post("endpoint url", mentee)
+                .then(() => {
+                    alert("Add mentee succeess!");
+                    // handle fetch API mentee
+                    goBack();
+                })
+                .catch((err) => console.log(err.response.data));
+        }
+    }
+
+    // handle Edit
+    const handleEdit = ({ id }) => {
+        setEditMente(id);
+    }
+
+    // handle Delete
+    const handleDelete = ({ id }) => {
+        axios
+            .delete("endpoint url")
+            .then(() => {
+                alert("Mentee deleted");
+                // handle fetching API mentee
+            })
+            .catch((err) => console.log(err.response.data));
+    };
+
     return (
         <div style={{ backgroundColor: '#F9F9F9' }}>
             <div>
