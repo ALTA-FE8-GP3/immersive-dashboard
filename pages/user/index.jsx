@@ -114,7 +114,7 @@ const Index = () => {
                 />
               </InputGroup>
               <div style={{ paddingTop: "15px" }}>
-                <Button
+                {ROLE === "Admin" ? <Button
                   onClick={handleShow}
                   style={{
                     width: "300px",
@@ -123,7 +123,7 @@ const Index = () => {
                   }}
                 >
                   Add New User
-                </Button>
+                </Button> : <></>}
               </div>
               <div style={{ paddingTop: "30px" }}>
                 <Table responsive>
