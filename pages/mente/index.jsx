@@ -13,6 +13,10 @@ import { useThemeContext } from "../../context/contextTheme";
 const Index = () => {
 
   const { isDark } = useThemeContext()
+  const [query, setQuery] = useState({
+    class: "",
+    status: ""
+  })
   const [allClass, setAllClass] = useState([]);
   const [menteeList, setMenteeList] = useState([]);
 
@@ -82,6 +86,25 @@ const Index = () => {
     })
   }
 
+  // handleQuery
+  const handleQuery = (e) => {
+    let newQuery = { ...query }
+    newQuery[e.target.name] = e.target.value
+    console.log(e.target.name)
+    setQuery(newQuery)
+  }
+
+  const getFilter = (e) => {
+    e.preventDefault()
+    axios.get(`https://grupproject.site/mentee?status=${query.status}&class_id${query.class}`)
+      .then((res) => {
+        setMenteeList(res.data.data)
+      })
+      .catch(err => console.error(err.response.data))
+  }
+
+  console.log(query)
+
   return (
     <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{ backgroundColor: '#F9F9F9', minHeight: "120vh" }}>
       <div>
@@ -107,7 +130,7 @@ const Index = () => {
                   <Button style={buttonFilter} size='sm'>Export</Button>
                 </Col>
                 <Col sm className='py-2'>
-                  <Form.Select size='sm'>
+                  <Form.Select name="class" onChange={(e) => handleQuery(e)} size='sm'>
                     <option selected>All Class</option>
                     {allClass.map((obj) => {
                       const { id, nama_class } = obj;
@@ -118,8 +141,8 @@ const Index = () => {
                   </Form.Select>
                 </Col>
                 <Col sm className='py-2'>
-                  <Form.Select name='status'>
-                    <option>All status</option>
+                  <Form.Select onChange={(e) => handleQuery(e)} name='status'>
+                    <option value="">All status</option>
                     <option value="Interview">Interview</option>
                     <option value="Join Class">Join Class</option>
                     <option value="Unit 1">Unit 1</option>
@@ -141,7 +164,7 @@ const Index = () => {
                   </Form.Select>
                 </Col>
                 <Col sm className='py-2'>
-                  <Button style={buttonFilter} size='sm'>Filter</Button>
+                  <Button style={buttonFilter} size='sm' onClick={(e) => getFilter(e)}>Filter</Button>
                 </Col>
               </Row>
             </div>
@@ -161,17 +184,17 @@ const Index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {menteeList.map((obj, index) => {
+                  {menteeList?.map((obj, index) => {
                     const { ID, nama_mentee, nama_class, status, category, gender } = obj;
                     return (
-                      <tr key={index} onClick={() => goLog(ID)}>
+                      <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{nama_mentee}</td>
                         <td>{nama_class}</td>
                         <td>{status}</td>
                         <td>{category}</td>
                         <td>{gender}</td>
-                        <td><AiFillFolderOpen /></td>
+                        <td><AiFillFolderOpen onClick={() => goLog(ID)} /></td>
                         <td><BiEditAlt onClick={() => handleEdit(ID)} /></td>
                         <td><MdDeleteOutline onClick={() => handleDelete(obj)} /></td>
                       </tr>

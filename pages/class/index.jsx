@@ -179,7 +179,7 @@ const Index = (props) => {
                   <tr>
                     <th>No.</th>
                     <th>Name</th>
-                    <th></th>
+                    <th>Penanggung Jawab</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -189,6 +189,7 @@ const Index = (props) => {
                       <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{item.nama_class}</td>
+                        <td>{item.nama_user}</td>
                         <td>
                           <a onClick={() => handleEdit(item)}>
                             <BiEditAlt />
