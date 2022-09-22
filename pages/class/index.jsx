@@ -29,9 +29,6 @@ const Index = () => {
     var config = {
       method: "get",
       url: "https://grupproject.site/class",
-      // headers: {
-      //   Authorization: `Bearer ${getCookie("token")}`
-      // },
     };
 
     await axios(config)
@@ -65,14 +62,11 @@ const Index = () => {
       var config = {
         method: "put",
         url: `https://grupproject.site/class/${idClass}`,
-        headers: {
-          Authorization: `Bearer ${getCookie("token")}`
-        },
         data: data
       };
 
       axios(config)
-        .then((response) => {
+        .then(() => {
           alert("Edit class success!");
           getClass();
           handleClose();
@@ -87,9 +81,6 @@ const Index = () => {
       var config = {
         method: "post",
         url: "https://grupproject.site/class",
-        headers: {
-          Authorization: `Bearer ${getCookie("token")}`
-        },
         data: data
       };
 
@@ -115,9 +106,6 @@ const Index = () => {
     var config = {
       method: "delete",
       url: `https://grupproject.site/class/${id}`,
-      headers: {
-        Authorization: `Bearer ${getCookie("token")}`
-      }
     };
     axios(config)
       .then(() => {

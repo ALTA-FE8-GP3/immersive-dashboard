@@ -6,10 +6,6 @@ import { setCookie, getCookie } from "cookies-next";
 import axios from "axios";
 
 const Index = () => {
-  const [role, setRole] = useState()
-  useEffect(() => {
-    setRole(getCookie("role"))
-  })
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -25,7 +21,7 @@ const Index = () => {
 
     var config = {
       method: "post",
-      url: "http://grupproject.site/login",
+      url: "https://grupproject.site/login",
       headers: {
         "Content-Type": "application/json",
       },
@@ -36,7 +32,7 @@ const Index = () => {
       .then(function (response) {
         setCookie("token", response.data.Token);
         setCookie("role", response.data.Role);
-        alert(`Login as ${role}`);
+        alert(response.data.Message);
         location.href = "/dashboard"
       })
       .catch(function (error) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { getCookie } from "cookies-next"
+import { getCookie, hasCookie } from "cookies-next"
 import { CgProfile } from "react-icons/cg";
 import { Container, Row, Col, Badge } from "react-bootstrap"
 

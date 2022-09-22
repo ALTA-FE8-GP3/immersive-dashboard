@@ -8,6 +8,16 @@ import { getCookie } from "cookies-next"
 import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
 
+// export const getServerSideProps = async () => {
+//   const response = await axios.get(`https://grupproject.site/users`)
+//   const userList = response
+//   return {
+//     props: {
+//       userList: userList
+//     }
+//   }
+// }
+
 const Index = () => {
   // Dont distract
   const [show, setShow] = useState(false);
@@ -28,7 +38,7 @@ const Index = () => {
   });
 
   const getApi = () => {
-    axios.get("http://grupproject.site/users")
+    axios.get("https://grupproject.site/users")
       .then((res) => setUserList(res.data.Data))
   }
   useEffect(() => {
@@ -46,8 +56,7 @@ const Index = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (edit) {
-      console.log("put")
-      axios.put(`http://grupproject.site/users/${edit}`, user)
+      axios.put(`https://grupproject.site/users/${edit}`, user)
         .then(() => {
           alert("Update user successfully")
           setEdit(null)
@@ -56,8 +65,7 @@ const Index = () => {
         })
         .catch(err => console.log(err.response.data))
     } else {
-      console.log("post")
-      axios.post("http://grupproject.site/users", user)
+      axios.post("https://grupproject.site/users", user)
         .then(() => {
           alert("Add user successfully");
           getApi()
@@ -75,7 +83,7 @@ const Index = () => {
 
   // handle Delete
   const handleDelete = ({ id }) => {
-    axios.delete(`http://grupproject.site/users/${id}`)
+    axios.delete(`https://grupproject.site/users/${id}`)
       .then(() => {
         alert("User deleted")
         getApi()
