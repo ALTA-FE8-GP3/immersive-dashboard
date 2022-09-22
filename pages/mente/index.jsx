@@ -74,6 +74,14 @@ const Index = () => {
       .catch((err) => console.log(err.response.data));
   };
 
+  // goLog
+  const goLog = (id) => {
+    router.push({
+      pathname: "/mente/detail",
+      query: { id: id }
+    })
+  }
+
   return (
     <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{ backgroundColor: '#F9F9F9', minHeight: "120vh" }}>
       <div>
@@ -154,7 +162,7 @@ const Index = () => {
                   {menteeList.map((obj, index) => {
                     const { ID, nama_mentee, nama_class, status, category, gender } = obj;
                     return (
-                      <tr key={index} onClick={goLog}>
+                      <tr key={index} onClick={() => goLog(ID)}>
                         <td>{index + 1}</td>
                         <td>{nama_mentee}</td>
                         <td>{nama_class}</td>

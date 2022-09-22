@@ -25,9 +25,9 @@ const AddModal = ({
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {(add === "user" && "Add User") ||
+            {(add === "user" && "Add User / Edit User") ||
               (add === "log" && "Add Log") ||
-              (add === "class" && "Add Class")}
+              (add === "class" && "Add Class / Edit Class")}
           </Modal.Title>
         </Modal.Header>
 
@@ -166,24 +166,23 @@ const AddModal = ({
                       <span>Status</span>
                     </Col>
                     <Col xl={10} className="">
-                      <Form.Select aria-label="Default select example">
+                      <Form.Select name="status" onChange={(e) => handleInput(e)} aria-label="Default select example">
                         <option>Select your status</option>
-                        <option value="active">Active</option>
-                        <option value="notActive">Not Active</option>
-                        <option value="deleted">Deleted</option>
+                        <option value="Active">Active</option>
+                        <option value="Not Active">Not Active</option>
+                        <option value="Deleted">Deleted</option>
                       </Form.Select>
                     </Col>
                   </Form.Group>
                   <Form.Group
-                    onChange={(e) => handleAdd(e)}
                     controlId="formFile"
                     className="mb-3 row"
                   >
                     <Col xl={2} className="pt-2">
-                      <span>File</span>
+                      <span>Url File</span>
                     </Col>
                     <Col xl={10}>
-                      <Form.Control type="file" />
+                      <Form.Control onChange={(e) => handleInput(e)} name="url_file" type="file" />
                     </Col>
                   </Form.Group>
                   <Form.Group
@@ -191,7 +190,7 @@ const AddModal = ({
                     controlId="exampleForm.ControlTextarea1"
                   >
                     <Form.Label>Feedback</Form.Label>
-                    <Form.Control as="textarea" rows={3} />
+                    <Form.Control onChange={(e) => handleInput(e)} name="feedback" as="textarea" rows={3} />
                   </Form.Group>
                 </Row>
               )) ||

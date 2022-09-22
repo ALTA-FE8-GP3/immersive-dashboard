@@ -134,7 +134,7 @@ const Add = () => {
                         title="Add New Mentee"
                     />
                     <Row className='justify-content-center pb-4 '>
-                        <Col md='8' xs={12} className='px-5 py-4 mx-3  bg-dark' style={{ border: '1px solid #A3A3A3', borderRadius: '5px' }}>
+                        <Col md='8' xs={12} className={isDark ? "bg-dark text-white px-5 py-4 mx-3" : "px-5 py-4 mx-3"} style={{ border: '1px solid #A3A3A3', borderRadius: '5px' }}>
                             <Form.Group as={Row} className='mb-2' controlId='formPlainTextName'>
                                 <Form.Label column sm='2'>Name</Form.Label>
                                 <Col sm='10'>
