@@ -29,11 +29,19 @@ const Index = () => {
   }
 
   // Navigate to add mentee page
-  const GoAdd = () => {
-    Router.push({
-      pathname: '/mente/add'
+  const router = useRouter()
+  const GoAdd = (id) => {
+    router.push({
+      pathname: '/mente/add',
+      query: { id: id }
     }
     )
+  }
+
+  // handle Edit
+  const [editMente, setEditMente] = useState();
+  const handleEdit = (id) => {
+    GoAdd(id)
   }
 
   // Get All Mentee
@@ -52,10 +60,6 @@ const Index = () => {
 
   useEffect(() => {
     getMentee();
-    getClass();
-  }, []);
-
-  useEffect(() => {
     getClass();
   }, []);
 
@@ -148,17 +152,17 @@ const Index = () => {
                 </thead>
                 <tbody>
                   {menteeList.map((obj, index) => {
-                    const { nama_mentee, class_id, status, type, gender } = obj;
+                    const { ID, nama_mentee, nama_class, status, category, gender } = obj;
                     return (
                       <tr key={index} onClick={goLog}>
                         <td>{index + 1}</td>
                         <td>{nama_mentee}</td>
-                        <td>{class_id}</td>
+                        <td>{nama_class}</td>
                         <td>{status}</td>
-                        <td>{type}</td>
+                        <td>{category}</td>
                         <td>{gender}</td>
                         <td><AiFillFolderOpen /></td>
-                        <td><BiEditAlt /></td>
+                        <td><BiEditAlt onClick={() => handleEdit(ID)} /></td>
                         <td><MdDeleteOutline onClick={() => handleDelete(obj)} /></td>
                       </tr>
                     )
