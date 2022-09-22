@@ -15,7 +15,7 @@ const Index = () => {
   const handleShow = () => setShow(true);
 
   // Initiate State
-  const [role, setRole] = useState()
+  const [ROLE, setROLE] = useState()
   const [edit, setEdit] = useState();
   const [userList, setUserList] = useState([]);
   const [user, setUser] = useState({
@@ -29,14 +29,14 @@ const Index = () => {
 
   // setRole Cookie
   useEffect(() => {
-    setRole(getCookie("role"))
+    setROLE(getCookie("role"))
   }, [])
 
   // Fetch api
   const getApi = () => {
     axios
       .get("https://grupproject.site/users")
-      .then((res) => setUserList(res.data.Data));
+      .then((res) => setUserList(res.data.data));
   };
   useEffect(() => {
     getApi();
@@ -92,6 +92,7 @@ const Index = () => {
   };
 
   return (
+    console.log(userList),
     <>
       <div style={{ backgroundColor: "#F9F9F9" }}>
         <div>
@@ -113,7 +114,7 @@ const Index = () => {
                 />
               </InputGroup>
               <div style={{ paddingTop: "15px" }}>
-                {role === "Admin" ? (
+                {ROLE === "Admin" ? (
                   <Button
                     onClick={handleShow}
                     style={{
@@ -153,7 +154,7 @@ const Index = () => {
                           <td>{team}</td>
                           <td>{role}</td>
                           <td>{status}</td>
-                          {role === "Admin" ? (
+                          {ROLE === "Admin" ? (
                             <>
                               <td>
                                 <BiEditAlt onClick={() => handleEdit(obj)} />
