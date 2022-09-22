@@ -22,7 +22,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                             (
                                 add === "user" &&
                                 <Row>
-                                    <Form.Group className="mb-3 row" controlId="exampleForm.ControlInput1">
+                                    <Form.Group className="mb-3 row" controlid="exampleForm.ControlInput1">
                                         <Col xl={2} className="pt-2">
                                             <span>Name</span>
                                         </Col>
@@ -37,7 +37,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                             />
                                         </Col>
                                     </Form.Group>
-                                    <Form.Group className="mb-3 row" controlId="exampleForm.ControlInput2">
+                                    <Form.Group className="mb-3 row" controlid="exampleForm.ControlInput2">
                                         <Col xl={2} className="pt-2">
                                             <span>Email</span>
                                         </Col>
@@ -53,7 +53,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                     </Form.Group>
                                     <Form.Group
                                         className="mb-3 row"
-                                        controlId="exampleForm.ControlInput3"
+                                        controlid="exampleForm.ControlInput3"
                                     >
                                         <Col xl={2} className="pt-2">
                                             <span>Password</span>
@@ -84,7 +84,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                                 label="Admin"
                                                 name="role"
                                                 type="radio"
-                                                controlId="exampleForm.ControlInput4"
+                                                controlid="exampleForm.ControlInput4"
                                             />
                                             <Form.Check
                                                 value="Default"
@@ -92,14 +92,14 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                                 label="User"
                                                 name="role"
                                                 type="radio"
-                                                controlId="exampleForm.ControlInput99"
+                                                controlid="exampleForm.ControlInput99"
                                             />
                                         </Col>
                                     </Form.Group>
                                     <Form.Group
                                         onChange={(e) => handleInput(e)}
                                         className="mb-3 row"
-                                        controlId="exampleForm.ControlInput5"
+                                        controlid="exampleForm.ControlInput5"
                                     >
                                         <Col xl={2} className="pt-2">
                                             <span>Team</span>
@@ -116,7 +116,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                     <Form.Group
                                         onChange={(e) => handleInput(e)}
                                         className="mb-3 row"
-                                        controlId="exampleForm.ControlInput6"
+                                        controlid="exampleForm.ControlInput6"
                                     >
                                         <Col xl={2} className="pt-2">
                                             <span>Status</span>
@@ -134,7 +134,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                             ) || (
                                 add === "log" &&
                                 <Row>
-                                    <Form.Group className="mb-3 row" controlId="exampleForm.ControlInput1">
+                                    <Form.Group className="mb-3 row" controlid="exampleForm.ControlInput1">
                                         <Col xl={2} className="pt-2">
                                             <span>Status</span>
                                         </Col>
@@ -147,7 +147,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                             </Form.Select>
                                         </Col>
                                     </Form.Group>
-                                    <Form.Group onChange={e => handleAdd(e)} controlId="formFile" className="mb-3 row">
+                                    <Form.Group onChange={e => handleAdd(e)} controlid="formFile" className="mb-3 row">
                                         <Col xl={2} className="pt-2">
                                             <span>File</span>
                                         </Col>
@@ -157,7 +157,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                                     </Form.Group>
                                     <Form.Group
                                         className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1"
+                                        controlid="exampleForm.ControlTextarea1"
                                     >
                                         <Form.Label>Feedback</Form.Label>
                                         <Form.Control as="textarea" rows={3} />
@@ -166,7 +166,7 @@ const AddModal = ({ handleClose, show, add, user, handleInput, handleSubmit, han
                             ) || (
                                 add === "class" &&
                                 <Row>
-                                    <Form.Group className="mb-3 row" controlId="exampleForm.ControlInput1">
+                                    <Form.Group className="mb-3 row" controlid="exampleForm.ControlInput1">
                                         <Col xl={2} className="pt-2">
                                             <span>Name</span>
                                         </Col>
