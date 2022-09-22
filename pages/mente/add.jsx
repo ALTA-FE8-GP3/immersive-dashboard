@@ -1,8 +1,74 @@
-import React from 'react'
+import axios from 'axios';
+import Router from 'next/router';
+import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import SubNavbar from '../../components/SubNavbar'
 
 const Add = () => {
+    // Initiate State
+    const [editMente, setEditMente] = useState();
+    const [mentee, setMentee] = useState({
+        nama_mentee: "",
+        address: "",
+        home_address: "",
+        email: "",
+        gender: "",
+        telegram: "",
+        phone: "",
+        discord: "",
+        nama_emergency: "",
+        phone_emergency: "",
+        status_emergency: "",
+        type: "",
+        major: "",
+        graduate: "",
+        status: "",
+        id_class: ""
+    });
+
+    const goBack = () => {
+        Router.push({
+            pathname: "/mente"
+        })
+    }
+
+    // handle Input
+    const handleInput = (e) => {
+        let newMentee = { ...mentee };
+        newMentee[e.target.name] = e.target.value;
+        setMentee(newMentee);
+    };
+
+    // handle Submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (editMente) {
+            axios
+                .put("endpoint url", mentee)
+                .then(() => {
+                    alert("Update data mentee success!");
+                    setEditMente(null);
+                    // handle fetch API mentee
+                    goBack();
+                })
+                .catch((err) => console.log(err.response.data));
+        } else {
+            axios
+                .post("endpoint url", mentee)
+                .then(() => {
+                    alert("Add mentee succeess!");
+                    // handle fetch API mentee
+                    goBack();
+                })
+                .catch((err) => console.log(err.response.data));
+        }
+    }
+
+    // handle Edit
+    const handleEdit = ({ id }) => {
+        setEditMente(id);
+    }
+
     return (
         <div style={{ backgroundColor: '#F9F9F9' }}>
             <div>
@@ -114,7 +180,9 @@ const Add = () => {
                             </Form.Group>
                             <Row lg={6} xs='2' className='container justify-content-end pt-3' style={{ textAlign: 'right' }}>
                                 <Col lg='2'>
-                                    <Button className='w-100' size='sm' style={{ backgroundColor: '#F47624', borderColor: '#F47624' }}>Cancel</Button>
+                                    <Button className='w-100' size='sm'
+                                        onClick={goBack}
+                                        style={{ backgroundColor: '#F47624', borderColor: '#F47624' }}>Cancel</Button>
                                 </Col>
                                 <Col lg='2'>
                                     <Button className='w-100' size='sm' style={{ backgroundColor: '#17345F', borderColor: '##17345F' }}>Save</Button>
