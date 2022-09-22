@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { InputGroup, Form, Button, Table, Pagination } from "react-bootstrap";
+import { InputGroup, Form, Button, Table } from "react-bootstrap";
 import { BiEditAlt } from "react-icons/bi";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr"
 import { MdDeleteOutline } from "react-icons/md";
+import { getCookie } from "cookies-next";
 // Components
 import { useThemeContext } from "../../context/contextTheme";
 import SubNavbar from '../../components/SubNavbar'
@@ -15,6 +17,7 @@ export const getServerSideProps = async (context) => {
       Authorization: `Bearer ${token}`,
     },
   });
+  console.log(response)
   const userList = await response.json();
   return {
     props: {
@@ -143,7 +146,7 @@ const Index = (props) => {
   };
 
   return (
-    <div style={{ backgroundColor: '#F9F9F9',minHeight : "100vh" }} className={isDark ? "bg-dark text-white" : ""}>
+    <div style={{ backgroundColor: '#F9F9F9', minHeight: "100vh" }} className={isDark ? "bg-dark text-white" : ""}>
       <div>
         <div className='px-3'>
           <SubNavbar
@@ -171,7 +174,7 @@ const Index = (props) => {
               </Button>
             </div>
             <div style={{ paddingTop: "30px" }}>
-              <Table responsive>
+              <Table className={isDark ? "text-white" : ""} responsive>
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -188,7 +191,7 @@ const Index = (props) => {
                         <td>{item.nama_class}</td>
                         <td>
                           <a onClick={() => handleEdit(item)}>
-                            <BiEditAlt style={{ color: "black" }} />
+                            <BiEditAlt />
                           </a>
                         </td>
                         <td>
@@ -202,16 +205,15 @@ const Index = (props) => {
                 </tbody>
               </Table>
             </div>
-            <div className="pt-3">
-              <Pagination className="justify-content-end">
-                <Pagination.Prev>Prev</Pagination.Prev>
-                <Pagination.Item>{1}</Pagination.Item>
-                <Pagination.Item>{2}</Pagination.Item>
-                <Pagination.Item active>{3}</Pagination.Item>
-                <Pagination.Item>{4}</Pagination.Item>
-                <Pagination.Item>{5}</Pagination.Item>
-                <Pagination.Next>Next</Pagination.Next>
-              </Pagination>
+            <div className="me-5 float-end">
+              <Button variant={isDark ? "light" : ""} style={{backgroundColor : "#F47624"}}>
+                <GrFormPrevious />
+                <GrFormPrevious />
+              </Button>
+              <Button variant={isDark ? "light" : ""} className="ms-4" style={{backgroundColor : "#F47624"}}>
+                <GrFormNext />
+                <GrFormNext />
+              </Button>
             </div>
           </div>
         </div>

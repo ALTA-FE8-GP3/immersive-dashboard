@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Form, InputGroup, Button, Row, Col, DropdownButton, Dropdown, Table, Pagination } from 'react-bootstrap'
-import SubNavbar from '../../components/SubNavbar'
+import { GrFormNext, GrFormPrevious } from "react-icons/gr"
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { AiFillFolderOpen } from "react-icons/ai";
 import Router from 'next/router';
-import { useThemeContext } from "../../context/contextTheme";
 import axios from 'axios';
+// import components
+import SubNavbar from '../../components/SubNavbar'
+import { useThemeContext } from "../../context/contextTheme";
 
 const Index = () => {
 
@@ -69,13 +71,13 @@ const Index = () => {
   };
 
   return (
-    <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{ backgroundColor: '#F9F9F9' }}>
+    <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{ backgroundColor: '#F9F9F9', minHeight: "120vh" }}>
       <div>
         <div className='px-3'>
           <SubNavbar
             title="Mentee List"
           />
-          <div className={isDark ? "bg-dark text-white p-4 mt-3" : "p-4 mt-3"}> 
+          <div className={isDark ? "bg-dark text-white p-4 mt-3" : "p-4 mt-3"}>
             <InputGroup style={{ width: '300px' }}>
               <InputGroup.Text id='basic-addon1' style={{ backgroundColor: '#17345F', color: 'white' }}>Search</InputGroup.Text>
               <Form.Control
@@ -164,16 +166,15 @@ const Index = () => {
                 </tbody>
               </Table>
             </div>
-            <div className='pt-3'>
-              <Pagination className='justify-content-end'>
-                <Pagination.Prev>Prev</Pagination.Prev>
-                <Pagination.Item>{1}</Pagination.Item>
-                <Pagination.Item>{2}</Pagination.Item>
-                <Pagination.Item active>{3}</Pagination.Item>
-                <Pagination.Item>{4}</Pagination.Item>
-                <Pagination.Item>{5}</Pagination.Item>
-                <Pagination.Next>Next</Pagination.Next>
-              </Pagination>
+            <div className="pt-3 float-end">
+              <Button variant={isDark ? "light" : ""} style={{ backgroundColor: "#F47624" }}>
+                <GrFormPrevious />
+                <GrFormPrevious />
+              </Button>
+              <Button variant={isDark ? "light" : ""} className="ms-4" style={{ backgroundColor: "#F47624" }}>
+                <GrFormNext />
+                <GrFormNext />
+              </Button>
             </div>
           </div>
         </div>

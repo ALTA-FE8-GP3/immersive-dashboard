@@ -2,10 +2,12 @@ import axios from 'axios';
 import Router from 'next/router';
 import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
+import { useThemeContext } from "../../context/contextTheme";
 import SubNavbar from '../../components/SubNavbar'
 
 const Add = () => {
     // Initiate State
+    const { isDark } = useThemeContext()
     const [editMente, setEditMente] = useState();
     const [mentee, setMentee] = useState({
         nama_mentee: "",
@@ -70,14 +72,14 @@ const Add = () => {
     }
 
     return (
-        <div style={{ backgroundColor: '#F9F9F9' }}>
+        <div style={{ backgroundColor: '#F9F9F9' }} className={isDark ? "bg-dark text-white" : ""}>
             <div>
                 <div className='px-3'>
                     <SubNavbar
                         title="Add New Mentee"
                     />
-                    <Row className='justify-content-center pb-4'>
-                        <Col md='8' xs={12} className='px-5 py-4 mx-3 bg-white' style={{ border: '1px solid #A3A3A3', borderRadius: '5px' }}>
+                    <Row className='justify-content-center pb-4 '>
+                        <Col md='8' xs={12} className='px-5 py-4 mx-3  bg-dark' style={{ border: '1px solid #A3A3A3', borderRadius: '5px' }}>
                             <Form.Group as={Row} className='mb-2' controlId='formPlainTextName'>
                                 <Form.Label column sm='2'>Name</Form.Label>
                                 <Col sm='10'>

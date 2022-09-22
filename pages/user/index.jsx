@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
-import { Button, Form, InputGroup, Pagination, Table } from "react-bootstrap";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr"
+import { Button, Form, InputGroup, Table } from "react-bootstrap";
 import { getCookie } from "cookies-next";
 // Import Components
 import "../../styles/Home.module.css"
@@ -98,7 +99,7 @@ const Index = () => {
     <>
       <div >
         <div>
-          <div className={isDark ? "bg-dark text-white px-3" : "px-3"}>
+          <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{minHeight : "120vh"}}>
             <SubNavbar title="User List" />
             <div className={`mt-3 p-4 ${isDark ? "bg-dark text-white" : ''} `}>
               <InputGroup style={{ width: "300px" }}>
@@ -176,16 +177,15 @@ const Index = () => {
                   </tbody>
                 </Table>
               </div>
-              <div className="pt-3">
-                <Pagination className="justify-content-end">
-                  <Pagination.Prev>Prev</Pagination.Prev>
-                  <Pagination.Item>{1}</Pagination.Item>
-                  <Pagination.Item>{2}</Pagination.Item>
-                  <Pagination.Item active>{3}</Pagination.Item>
-                  <Pagination.Item>{4}</Pagination.Item>
-                  <Pagination.Item>{5}</Pagination.Item>
-                  <Pagination.Next>Next</Pagination.Next>
-                </Pagination>
+              <div className="pt-3 float-end">
+                <Button variant={isDark ? "light" : ""} style={{ backgroundColor: "#F47624" }}>
+                  <GrFormPrevious />
+                  <GrFormPrevious />
+                </Button>
+                <Button variant={isDark ? "light" : ""} className="ms-4" style={{ backgroundColor: "#F47624" }}>
+                  <GrFormNext />
+                  <GrFormNext />
+                </Button>
               </div>
             </div>
           </div>

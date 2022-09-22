@@ -1,11 +1,13 @@
 import React, { useState } from "react"
 import { Badge, Button, Col, Container, Row } from "react-bootstrap"
+import { useThemeContext } from "../../context/contextTheme";
 import AddModal from "../../components/AddModal";
 import SubNavbar from "../../components/SubNavbar"
 
 const Detail = () => {
 
     // Dont distract
+    const { isDark } = useThemeContext()
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -16,14 +18,14 @@ const Detail = () => {
             <style jsx>
                 {`
             p,h2,span {
-                color : #17345F;
+                color : ${isDark ? "#F47624" : "#17345F"};
             }
             h5 {
-                color : #F47624
+                color : ${isDark ? "white" : "#F47624"}
             }
         `}
             </style>
-            <div>
+            <div className={isDark ? "bg-dark text-white" : ""} style={{minHeight : "120vh"}}>
                 <div className="px-3">
                     <SubNavbar title="Mentee Log" />
                     <Row className="px-5 mt-4 d-xl-flex justify-content-between">

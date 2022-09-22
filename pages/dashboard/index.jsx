@@ -3,15 +3,15 @@ import React from "react";
 import { Col, Row, Card, Button } from "react-bootstrap";
 import { BsFillPersonXFill, BsFillPersonCheckFill } from "react-icons/bs";
 import { TbRepeat } from "react-icons/tb";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
+// import {
+//   LineChart,
+//   Line,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   Legend,
+// } from "recharts";
 // Import Components
 import SubNavbar from '../../components/SubNavbar'
 import { useThemeContext } from "../../context/contextTheme";
@@ -28,43 +28,43 @@ const Index = () => {
 
   const data = [
     {
-      name: "Page A",
+      name: "Januari",
       register: 4000,
       graduates: 2400,
       placement: 2400,
     },
     {
-      name: "Page B",
+      name: "Februari",
       register: 3000,
       graduates: 1398,
       placement: 2210,
     },
     {
-      name: "Page C",
+      name: "Maret",
       register: 2000,
       graduates: 9800,
       placement: 2290,
     },
     {
-      name: "Page D",
+      name: "April",
       register: 2780,
       graduates: 3908,
       placement: 2000,
     },
     {
-      name: "Page E",
+      name: "Mei",
       register: 1890,
       graduates: 4800,
       placement: 2181,
     },
     {
-      name: "Page F",
+      name: "Juni",
       register: 2390,
       graduates: 3800,
       placement: 2500,
     },
     {
-      name: "Page G",
+      name: "Juli",
       register: 3490,
       graduates: 4300,
       placement: 2100,
@@ -75,7 +75,7 @@ const Index = () => {
     <div>
       <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{ minHeight: "100vh" }}>
         <SubNavbar title="Dashboard" />
-        <Row className="d-xl-flex justify-content-center mt-4 ">
+        <Row className="d-xl-flex justify-content-center mt-4 mb-5">
           {[
             { icon: iconCheck, text: "Joined Class", style: checkStyle },
             { icon: iconRepeat, text: "Repeated Unit", style: repeatStyle },
@@ -103,7 +103,7 @@ const Index = () => {
             );
           })}
         </Row>
-        <Row className="justify-content-center">
+        {/* <Row className="justify-content-center">
           <LineChart
             width={1000}
             height={450}
@@ -129,7 +129,7 @@ const Index = () => {
             <Line type="monotone" dataKey="register" stroke="green" />
             <Line type="monotone" dataKey="placement" stroke="#f47624" />
           </LineChart>
-        </Row>
+        </Row> */}
       </div>
     </div>
   );
