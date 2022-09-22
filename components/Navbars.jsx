@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { Nav, Container, Navbar, Col } from "react-bootstrap"
 import { TbLogout } from "react-icons/tb"
-import { BsFillMoonStarsFill, BsSunFill } from "react-icons/bs"
+import { BsMoonStars, BsSunFill } from "react-icons/bs"
 import { getCookie, deleteCookie } from "cookies-next"
 import { useRouter } from 'next/router';
 import { useThemeContext } from '../context/contextTheme';
@@ -33,7 +33,7 @@ const Navbars = () => {
                 <Navbar bg={isDark ? "dark" : "light"} expand="lg" className="shadow-sm border-bottom border-light navbar">
                     <Container fluid className="d-md-flex align-items-center justify-content-between">
                         <Navbar.Brand href="/" className="ms-5 ps-5 me-0">
-                            <img alt="" src={isDark ? "/logo-2.png" : "/logo.png"} style={{ maxWidth: 100, maxHeight: 100 }} onClick={() => navigate('/')}></img>{' '}
+                            <img src={isDark ? "/logo-2.png" : "/logo.png"} style={{ maxWidth: 100, maxHeight: 100 }} onClick={() => navigate('/')}></img>{' '}
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll" className="align-items-center justify-content-center">
@@ -53,9 +53,9 @@ const Navbars = () => {
                                     </Link>
                                 </Col>
                                 {isDark ?
-                                    <BsSunFill onClick={handleTheme} style={{cursor : "pointer"}} color='#F47624' className="me-5 mt-2" size={25} />
+                                    <BsSunFill onClick={handleTheme} style={{ cursor: "pointer" }} color='yellow' className="me-5 mt-2" size={25} />
                                     :
-                                    <BsFillMoonStarsFill onClick={handleTheme} style={{cursor : "pointer"}} color="#17345F" className="me-5 mt-2" size={25} />
+                                    <BsMoonStars onClick={handleTheme} style={{ cursor: "pointer" }} color="" className="me-5 mt-2" size={25} />
                                 }
                                 <Nav.Link onClick={handleLogout} href="/">
                                     <TbLogout /> Logout
