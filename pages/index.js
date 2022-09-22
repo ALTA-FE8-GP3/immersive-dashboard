@@ -13,7 +13,7 @@ const Index = () => {
   const [token, setToken] = useState()
   useEffect(() => {
     setToken(getCookie("token"))
-  })
+  },[])
 
   const handleLogin = async (e) => {
     e.preventDefault();
