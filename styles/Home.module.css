@@ -1,3 +1,7 @@
+.test {
+  background-color: red !important;
+}
+
 .container {
   padding: 0 2rem;
 }
