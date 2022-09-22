@@ -33,9 +33,10 @@ const Index = () => {
 
     axios(config)
       .then(function (response) {
-        setCookie("token", response.data.Token);
-        setCookie("role", response.data.Role);
-        alert(response.data.Message);
+        setCookie("token", response.data.token);
+        setCookie("role", response.data.role);
+        setCookie("user",response.data.user)
+        alert(response.data.message);
         location.href = "/dashboard"
       })
       .catch(function (error) {
