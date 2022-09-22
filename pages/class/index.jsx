@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { InputGroup, Form, Button, Table, Pagination } from 'react-bootstrap'
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
+import { getCookie } from "cookies-next";
 // Components
 import SubNavbar from '../../components/SubNavbar'
 import AddModal from '../../components/AddModal';
-import { getCookie } from "cookies-next";
 import axios from 'axios';
 
 const Index = () => {

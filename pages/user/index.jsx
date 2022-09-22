@@ -8,42 +8,16 @@ import { getCookie } from "cookies-next";
 import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
 
-export const getServerSideProps = async (context) => {
-  const token = getCookie("token", context)
-  const role = getCookie("role", context)
-  const response = await fetch(`https://grupproject.site/users`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const userList = await response.json();
-  return {
-    props: {
-      userList: userList,
-      role: role
-    },
-  };
-};
-
-const Index = (props) => {
+const Index = () => {
   // Dont distract
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(props);
-
 
   // Initiate State
-
-  // const role = getCookie("role")
-  // const [role, setRole] = useState();
-  // useEffect(() => {
-  //   setRole(getCookie("role"))
-  // }, [])
-
+  const [role, setRole] = useState()
   const [edit, setEdit] = useState();
   const [userList, setUserList] = useState([]);
-  const [query, setQuery] = useState("")
   const [user, setUser] = useState({
     nama_user: "",
     email: "",
@@ -53,6 +27,12 @@ const Index = (props) => {
     status: "",
   });
 
+  // setRole Cookie
+  useEffect(() => {
+    setRole(getCookie("role"))
+  }, [])
+
+  // Fetch api
   const getApi = () => {
     axios
       .get("https://grupproject.site/users")
@@ -133,7 +113,7 @@ const Index = (props) => {
                 />
               </InputGroup>
               <div style={{ paddingTop: "15px" }}>
-                {props.role === "Admin" ? (
+                {role === "Admin" ? (
                   <Button
                     onClick={handleShow}
                     style={{
@@ -163,7 +143,7 @@ const Index = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {props.userList.Data.map((obj, index) => {
+                    {userList.map((obj, index) => {
                       const { nama_user, email, team, role, status } = obj;
                       return (
                         <tr key={index}>
@@ -173,7 +153,7 @@ const Index = (props) => {
                           <td>{team}</td>
                           <td>{role}</td>
                           <td>{status}</td>
-                          {props.role === "Admin" ? (
+                          {role === "Admin" ? (
                             <>
                               <td>
                                 <BiEditAlt onClick={() => handleEdit(obj)} />
