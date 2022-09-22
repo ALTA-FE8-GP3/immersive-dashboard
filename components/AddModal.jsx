@@ -1,5 +1,13 @@
 import React from "react";
-import { Button, Modal, Form, Row, Col, DropdownButton, Dropdown } from "react-bootstrap";
+import {
+  Button,
+  Modal,
+  Form,
+  Row,
+  Col,
+  DropdownButton,
+  Dropdown,
+} from "react-bootstrap";
 
 const AddModal = ({
   handleClose,
@@ -9,6 +17,8 @@ const AddModal = ({
   handleInput,
   handleSubmit,
   handleNewClass,
+  mentor,
+  handleInputMentor,
 }) => {
   return (
     <>
@@ -209,12 +219,22 @@ const AddModal = ({
                         <span>Mentor</span>
                       </Col>
                       <Col xl={10} className="">
-                        <DropdownButton title="Pilih mentor">
-                            <Dropdown.Item >asd</Dropdown.Item>
-                            <Dropdown.Item >asd</Dropdown.Item>
-                            <Dropdown.Item >asd</Dropdown.Item>
-                            <Dropdown.Item >asd</Dropdown.Item>
-                        </DropdownButton>
+                        <Form.Select onChange={handleInputMentor}>
+                          <option value="" disabled selected>
+                            Select your option
+                          </option>
+                          {mentor.map((Mentor) => {
+                            return (
+                              // eslint-disable-next-line react/jsx-key
+                              <option
+                                value={Mentor.id}
+                                label={Mentor.nama_user}
+                              >
+                                {Mentor.nama_user}
+                              </option>
+                            );
+                          })}
+                        </Form.Select>
                       </Col>
                     </Row>
                   </Form.Group>

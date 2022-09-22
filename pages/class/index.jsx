@@ -10,7 +10,6 @@ import axios from "axios";
 
 export const getServerSideProps = async (context) => {
   const token = getCookie("token", context);
-  const role = getCookie("role", context);
   const response = await fetch(`https://grupproject.site/users`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -19,17 +18,17 @@ export const getServerSideProps = async (context) => {
   const userList = await response.json();
   return {
     props: {
-      userList: userList,
-      role: role,
+      mentor: userList,
     },
   };
 };
 
-const Index = () => {
+const Index = (props) => {
   // Dont distract
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  console.log(props.mentor.data);
 
   // Initiate State
   const [allClass, setAllClass] = useState();
@@ -38,6 +37,8 @@ const Index = () => {
   });
   const [editClass, setEditClass] = useState([]);
   const [idClass, setIdClass] = useState();
+  const [mentor, setMentor] = useState();
+  // console.log(mentor);
 
   // Get All Class
   const getClass = async () => {
@@ -48,8 +49,8 @@ const Index = () => {
 
     await axios(config)
       .then((response) => {
-        console.log(response.data.Data);
-        setAllClass(response.data.Data);
+        console.log(response.data.data);
+        setAllClass(response.data.data);
         console.log(allClass);
       })
       .catch((error) => {
@@ -67,12 +68,18 @@ const Index = () => {
     setEditClass(e.target.value);
   };
 
+  const handleInputMentor = (e) => {
+    setMentor(e.target.value)
+    console.log(e.target.value);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (idClass) {
       var data = {
         nama_class: editClass,
+        user_id: parseInt(mentor)
       };
       var config = {
         method: "put",
@@ -92,6 +99,7 @@ const Index = () => {
     } else {
       var data = {
         nama_class: newClass,
+        user_id: parseInt(mentor),
       };
       var config = {
         method: "post",
@@ -218,6 +226,8 @@ const Index = () => {
         handleShow={handleShow}
         handleInput={handleInput}
         handleSubmit={handleSubmit}
+        mentor={props.mentor.data}
+        handleInputMentor={handleInputMentor}
       />
     </div>
   );
