@@ -15,7 +15,7 @@ const Index = () => {
   const handleShow = () => setShow(true);
 
   // Initiate State
-  const [Role, setRole] = useState()
+  const [ROLE, setROLE] = useState()
   const [edit, setEdit] = useState();
   const [userList, setUserList] = useState([]);
   const [user, setUser] = useState({
@@ -29,7 +29,7 @@ const Index = () => {
 
   // setRole Cookie
   useEffect(() => {
-    setRole(getCookie("role"))
+    setROLE(getCookie("role"))
   }, [])
 
   // Fetch api
@@ -92,6 +92,7 @@ const Index = () => {
   };
 
   return (
+    console.log(userList),
     <>
       <div style={{ backgroundColor: "#F9F9F9" }}>
         <div>
@@ -113,7 +114,7 @@ const Index = () => {
                 />
               </InputGroup>
               <div style={{ paddingTop: "15px" }}>
-                {Role === "Admin" ? (
+                {ROLE === "Admin" ? (
                   <Button
                     onClick={handleShow}
                     style={{
@@ -153,7 +154,7 @@ const Index = () => {
                           <td>{team}</td>
                           <td>{role}</td>
                           <td>{status}</td>
-                          {Role === "Admin" ? (
+                          {ROLE === "Admin" ? (
                             <>
                               <td>
                                 <BiEditAlt onClick={() => handleEdit(obj)} />
