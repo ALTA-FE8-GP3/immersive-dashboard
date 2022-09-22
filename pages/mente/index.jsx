@@ -5,10 +5,14 @@ import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { AiFillFolderOpen } from "react-icons/ai";
 import Router from 'next/router';
+import { useThemeContext } from "../../context/contextTheme";
+import axios from 'axios';
 
 const Index = () => {
 
+  const { isDark } = useThemeContext()
   const [allClass, setAllClass] = useState([]);
+  const [menteeList, setMenteeList] = useState([]);
 
   const buttonAddStyle = {
     width: '300px',
@@ -22,6 +26,7 @@ const Index = () => {
     width: '100px'
   }
 
+  // Navigate to add mentee page
   const GoAdd = () => {
     Router.push({
       pathname: '/mente/add'
@@ -29,41 +34,48 @@ const Index = () => {
     )
   }
 
-  // Get All Class
-  const getClass = async () => {
-    var axios = require('axios');
-
-    var config = {
-      method: 'get',
-      url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class',
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co'
-      }
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        setAllClass(response.data.data);
-        console.log(allClass)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  // Get All Mentee
+  const getMentee = () => {
+    axios
+      .get("https://grupproject.site/mentee")
+      .then((res) => setMenteeList(res.data.data));
   };
+
+  // Get All Class
+  const getClass = () => {
+    axios
+      .get("https://grupproject.site/class")
+      .then((res) => setAllClass(res.data.data));
+  };
+
+  useEffect(() => {
+    getMentee();
+    getClass();
+  }, []);
 
   useEffect(() => {
     getClass();
   }, []);
 
+  // handle Delete
+  const handleDelete = ({ ID }) => {
+    axios
+      .delete(`https://grupproject.site/mentee/${ID}`)
+      .then(() => {
+        alert("Mentee deleted");
+        getMentee();
+      })
+      .catch((err) => console.log(err.response.data));
+  };
+
   return (
-    <div style={{ backgroundColor: '#F9F9F9' }}>
+    <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{ backgroundColor: '#F9F9F9' }}>
       <div>
         <div className='px-3'>
           <SubNavbar
             title="Mentee List"
           />
-          <div className='bg-white mt-3 p-4'>
+          <div className={isDark ? "bg-dark text-white p-4 mt-3" : "p-4 mt-3"}> 
             <InputGroup style={{ width: '300px' }}>
               <InputGroup.Text id='basic-addon1' style={{ backgroundColor: '#17345F', color: 'white' }}>Search</InputGroup.Text>
               <Form.Control
@@ -81,11 +93,15 @@ const Index = () => {
                   <Button style={buttonFilter} size='sm'>Export</Button>
                 </Col>
                 <Col sm className='py-2'>
-                  <DropdownButton id='dropdown-basic-button' title='All Class' size='sm' variant='secondary'>
-                    <Dropdown.Item href='#/action-1'>FE 8</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>BE 11</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>QE 7</Dropdown.Item>
-                  </DropdownButton>
+                  <Form.Select size='sm'>
+                    <option selected>All Class</option>
+                    {allClass.map((obj) => {
+                      const { id, nama_class } = obj;
+                      return (
+                        <option value={id}>{nama_class}</option>
+                      )
+                    })}
+                  </Form.Select>
                 </Col>
                 <Col sm className='py-2'>
                   <DropdownButton id='dropdown-basic-button' title='All Status' size='sm' variant='secondary'>
@@ -103,10 +119,10 @@ const Index = () => {
                   </DropdownButton>
                 </Col>
                 <Col sm className='py-2'>
-                  <DropdownButton id='dropdown-basic-button' title='All Category' size='sm' variant='secondary'>
-                    <Dropdown.Item href='#/action-1'>Informatics</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Non Informatics</Dropdown.Item>
-                  </DropdownButton>
+                  <Form.Select size='sm'>
+                    <option value="IT">IT</option>
+                    <option value="IT">Non-IT</option>
+                  </Form.Select>
                 </Col>
                 <Col sm className='py-2'>
                   <Button style={buttonFilter} size='sm'>Filter</Button>
@@ -114,7 +130,7 @@ const Index = () => {
               </Row>
             </div>
             <div>
-              <Table responsive>
+              <Table className={isDark ? "text-white" : ""} responsive>
                 <thead>
                   <tr>
                     <th>No.</th>
@@ -129,50 +145,22 @@ const Index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Si Pitung</td>
-                    <td>FE 7</td>
-                    <td>Graduated</td>
-                    <td>Informatics</td>
-                    <td>Male</td>
-                    <td><AiFillFolderOpen /></td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Si Pitung</td>
-                    <td>FE 7</td>
-                    <td>Graduated</td>
-                    <td>Informatics</td>
-                    <td>Male</td>
-                    <td><AiFillFolderOpen /></td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Si Pitung</td>
-                    <td>FE 7</td>
-                    <td>Graduated</td>
-                    <td>Informatics</td>
-                    <td>Male</td>
-                    <td><AiFillFolderOpen /></td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Si Pitung</td>
-                    <td>FE 7</td>
-                    <td>Graduated</td>
-                    <td>Informatics</td>
-                    <td>Male</td>
-                    <td><AiFillFolderOpen /></td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
+                  {menteeList.map((obj, index) => {
+                    const { nama_mentee, class_id, status, type, gender } = obj;
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{nama_mentee}</td>
+                        <td>{class_id}</td>
+                        <td>{status}</td>
+                        <td>{type}</td>
+                        <td>{gender}</td>
+                        <td><AiFillFolderOpen /></td>
+                        <td><BiEditAlt /></td>
+                        <td><MdDeleteOutline onClick={() => handleDelete(obj)} /></td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </Table>
             </div>

@@ -5,9 +5,11 @@ import { BsFillPersonXFill, BsFillPersonCheckFill } from "react-icons/bs"
 import { TbRepeat } from "react-icons/tb"
 // Import Components
 import SubNavbar from '../../components/SubNavbar'
+import { useThemeContext } from "../../context/contextTheme";
 
 const Index = () => {
   // Initiate style
+  const { isDark } = useThemeContext()
   const iconCheck = <BsFillPersonCheckFill color='#2CAF32' size={50} />
   const iconX = <BsFillPersonXFill color="#FE5462" size={50} />
   const iconRepeat = <TbRepeat color='white' size={50} />
@@ -17,7 +19,7 @@ const Index = () => {
 
   return (
     <div>
-      <div className='px-3'>
+      <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{minHeight : "100vh"}}>
         <SubNavbar title="Dashboard" />
         <Row className="d-xl-flex justify-content-center mt-4 ">
 
