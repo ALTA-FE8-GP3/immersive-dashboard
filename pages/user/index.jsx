@@ -3,29 +3,44 @@ import axios from "axios";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { Button, Form, InputGroup, Pagination, Table } from "react-bootstrap";
-import { getCookie } from "cookies-next"
+import { getCookie } from "cookies-next";
 // Import Components
 import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
 
-// export const getServerSideProps = async () => {
-//   const response = await axios.get(`https://grupproject.site/users`)
-//   const userList = response
-//   return {
-//     props: {
-//       userList: userList
-//     }
-//   }
-// }
+export const getServerSideProps = async (context) => {
+  const token = getCookie("token",context)
+  const role = getCookie("role",context)
+  const response = await fetch(`https://grupproject.site/users`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const userList = await response.json();
+  return {
+    props: {
+      userList: userList,
+      role : role
+    },
+  };
+};
 
-const Index = () => {
+const Index = (props) => {
   // Dont distract
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  console.log(props);
 
+  
   // Initiate State
-  const ROLE = getCookie("role")
+
+  // const role = getCookie("role")
+  // const [role, setRole] = useState();
+  // useEffect(() => {
+  //   setRole(getCookie("role"))
+  // }, [])
+  
   const [edit, setEdit] = useState();
   const [userList, setUserList] = useState([]);
   const [user, setUser] = useState({
@@ -38,12 +53,13 @@ const Index = () => {
   });
 
   const getApi = () => {
-    axios.get("https://grupproject.site/users")
-      .then((res) => setUserList(res.data.Data))
-  }
+    axios
+      .get("https://grupproject.site/users")
+      .then((res) => setUserList(res.data.Data));
+  };
   useEffect(() => {
-    getApi()
-  }, [])
+    getApi();
+  }, []);
 
   // handle input
   const handleInput = (e) => {
@@ -54,21 +70,23 @@ const Index = () => {
 
   // handle Submit
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (edit) {
-      axios.put(`https://grupproject.site/users/${edit}`, user)
+      axios
+        .put(`https://grupproject.site/users/${edit}`, user)
         .then(() => {
-          alert("Update user successfully")
-          setEdit(null)
-          getApi()
-          handleClose()
+          alert("Update user successfully");
+          setEdit(null);
+          getApi();
+          handleClose();
         })
-        .catch(err => console.log(err.response.data))
+        .catch((err) => console.log(err.response.data));
     } else {
-      axios.post("https://grupproject.site/users", user)
+      axios
+        .post("https://grupproject.site/users", user)
         .then(() => {
           alert("Add user successfully");
-          getApi()
+          getApi();
           handleClose();
         })
         .catch((err) => console.log(err.response.data));
@@ -77,21 +95,20 @@ const Index = () => {
 
   // handle Edit
   const handleEdit = ({ id }) => {
-    handleShow()
-    setEdit(id)
-  }
+    handleShow();
+    setEdit(id);
+  };
 
   // handle Delete
   const handleDelete = ({ id }) => {
-    axios.delete(`https://grupproject.site/users/${id}`)
+    axios
+      .delete(`https://grupproject.site/users/${id}`)
       .then(() => {
-        alert("User deleted")
-        getApi()
+        alert("User deleted");
+        getApi();
       })
-      .catch(err => console.log(err.response.data))
-  }
-
-
+      .catch((err) => console.log(err.response.data));
+  };
 
   return (
     <>
@@ -114,16 +131,20 @@ const Index = () => {
                 />
               </InputGroup>
               <div style={{ paddingTop: "15px" }}>
-                {ROLE === "Admin" ? <Button
-                  onClick={handleShow}
-                  style={{
-                    width: "300px",
-                    backgroundColor: "#F47624",
-                    borderColor: "#F47624",
-                  }}
-                >
-                  Add New User
-                </Button> : <></>}
+                {props.role === "Admin" ? (
+                  <Button
+                    onClick={handleShow}
+                    style={{
+                      width: "300px",
+                      backgroundColor: "#F47624",
+                      borderColor: "#F47624",
+                    }}
+                  >
+                    Add New User
+                  </Button>
+                ) : (
+                  <></>
+                )}
               </div>
               <div style={{ paddingTop: "30px" }}>
                 <Table responsive>
@@ -140,8 +161,8 @@ const Index = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.map((obj, index) => {
-                      const { nama_user, email, team, role, status } = obj
+                    {props.userList.Data.map((obj, index) => {
+                      const { nama_user, email, team, role, status } = obj;
                       return (
                         <tr key={index}>
                           <td>{index + 1}</td>
@@ -150,18 +171,22 @@ const Index = () => {
                           <td>{team}</td>
                           <td>{role}</td>
                           <td>{status}</td>
-                          {ROLE === "Admin" ?
+                          {props.role === "Admin" ? (
                             <>
                               <td>
                                 <BiEditAlt onClick={() => handleEdit(obj)} />
                               </td>
                               <td>
-                                <MdDeleteOutline onClick={() => handleDelete(obj)} />
+                                <MdDeleteOutline
+                                  onClick={() => handleDelete(obj)}
+                                />
                               </td>
-                            </> : <></>
-                          }
+                            </>
+                          ) : (
+                            <></>
+                          )}
                         </tr>
-                      )
+                      );
                     })}
                   </tbody>
                 </Table>
