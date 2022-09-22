@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Router } from 'next/router';
+import Router from 'next/router';
 import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import SubNavbar from '../../components/SubNavbar'
@@ -68,17 +68,6 @@ const Add = () => {
     const handleEdit = ({ id }) => {
         setEditMente(id);
     }
-
-    // handle Delete
-    const handleDelete = ({ id }) => {
-        axios
-            .delete("endpoint url")
-            .then(() => {
-                alert("Mentee deleted");
-                // handle fetching API mentee
-            })
-            .catch((err) => console.log(err.response.data));
-    };
 
     return (
         <div style={{ backgroundColor: '#F9F9F9' }}>
@@ -191,7 +180,9 @@ const Add = () => {
                             </Form.Group>
                             <Row lg={6} xs='2' className='container justify-content-end pt-3' style={{ textAlign: 'right' }}>
                                 <Col lg='2'>
-                                    <Button className='w-100' size='sm' style={{ backgroundColor: '#F47624', borderColor: '#F47624' }}>Cancel</Button>
+                                    <Button className='w-100' size='sm'
+                                        onClick={goBack}
+                                        style={{ backgroundColor: '#F47624', borderColor: '#F47624' }}>Cancel</Button>
                                 </Col>
                                 <Col lg='2'>
                                     <Button className='w-100' size='sm' style={{ backgroundColor: '#17345F', borderColor: '##17345F' }}>Save</Button>

@@ -24,6 +24,7 @@ const Index = () => {
     width: '100px'
   }
 
+  // Navigate to add mentee page
   const GoAdd = () => {
     Router.push({
       pathname: '/mente/add'
@@ -37,44 +38,30 @@ const Index = () => {
       .get("https://grupproject.site/mentee")
       .then((res) => setMenteeList(res.data.data));
   };
-  useEffect(() => {
-    getMentee();
-  }, []);
 
   // Get All Class
-  const getClass = async () => {
-    var axios = require('axios');
-
-    var config = {
-      method: 'get',
-      url: 'https://virtserver.swaggerhub.com/raorafarhan/ImmersiveDashboard/1.0.0/class',
-      headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MzgzMjYxODAsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJhZG1pbiJ9.AebFR-oQjUSOMez2ucDWkiMrS2eQIPmcYm5c71qZ_co'
-      }
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        setAllClass(response.data.data);
-        console.log(allClass)
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const getClass = () => {
+    axios
+      .get("https://grupproject.site/class")
+      .then((res) => setAllClass(res.data.data));
   };
+
+  useEffect(() => {
+    getMentee();
+    getClass();
+  }, []);
 
   useEffect(() => {
     getClass();
   }, []);
 
   // handle Delete
-  const handleDelete = ({ id }) => {
+  const handleDelete = ({ ID }) => {
     axios
-      .delete("endpoint url")
+      .delete(`https://grupproject.site/mentee/${ID}`)
       .then(() => {
         alert("Mentee deleted");
-        // handle fetching API mentee
+        getMentee();
       })
       .catch((err) => console.log(err.response.data));
   };
@@ -104,11 +91,15 @@ const Index = () => {
                   <Button style={buttonFilter} size='sm'>Export</Button>
                 </Col>
                 <Col sm className='py-2'>
-                  <DropdownButton id='dropdown-basic-button' title='All Class' size='sm' variant='secondary'>
-                    <Dropdown.Item href='#/action-1'>FE 8</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>BE 11</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>QE 7</Dropdown.Item>
-                  </DropdownButton>
+                  <Form.Select size='sm'>
+                    <option selected>All Class</option>
+                    {allClass.map((obj) => {
+                      const { id, nama_class } = obj;
+                      return (
+                        <option value={id}>{nama_class}</option>
+                      )
+                    })}
+                  </Form.Select>
                 </Col>
                 <Col sm className='py-2'>
                   <DropdownButton id='dropdown-basic-button' title='All Status' size='sm' variant='secondary'>
@@ -126,10 +117,10 @@ const Index = () => {
                   </DropdownButton>
                 </Col>
                 <Col sm className='py-2'>
-                  <DropdownButton id='dropdown-basic-button' title='All Category' size='sm' variant='secondary'>
-                    <Dropdown.Item href='#/action-1'>Informatics</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Non Informatics</Dropdown.Item>
-                  </DropdownButton>
+                  <Form.Select size='sm'>
+                    <option value="IT">IT</option>
+                    <option value="IT">Non-IT</option>
+                  </Form.Select>
                 </Col>
                 <Col sm className='py-2'>
                   <Button style={buttonFilter} size='sm'>Filter</Button>
