@@ -5,10 +5,12 @@ import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { AiFillFolderOpen } from "react-icons/ai";
 import Router from 'next/router';
+import axios from 'axios';
 
 const Index = () => {
 
   const [allClass, setAllClass] = useState([]);
+  const [menteeList, setMenteeList] = useState([]);
 
   const buttonAddStyle = {
     width: '300px',
@@ -28,6 +30,16 @@ const Index = () => {
     }
     )
   }
+
+  // Get All Mentee
+  const getMentee = () => {
+    axios
+      .get("https://grupproject.site/mentee")
+      .then((res) => setMenteeList(res.data.data));
+  };
+  useEffect(() => {
+    getMentee();
+  }, []);
 
   // Get All Class
   const getClass = async () => {
@@ -55,6 +67,17 @@ const Index = () => {
   useEffect(() => {
     getClass();
   }, []);
+
+  // handle Delete
+  const handleDelete = ({ id }) => {
+    axios
+      .delete("endpoint url")
+      .then(() => {
+        alert("Mentee deleted");
+        // handle fetching API mentee
+      })
+      .catch((err) => console.log(err.response.data));
+  };
 
   return (
     <div style={{ backgroundColor: '#F9F9F9' }}>
@@ -129,50 +152,22 @@ const Index = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Si Pitung</td>
-                    <td>FE 7</td>
-                    <td>Graduated</td>
-                    <td>Informatics</td>
-                    <td>Male</td>
-                    <td><AiFillFolderOpen /></td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Si Pitung</td>
-                    <td>FE 7</td>
-                    <td>Graduated</td>
-                    <td>Informatics</td>
-                    <td>Male</td>
-                    <td><AiFillFolderOpen /></td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Si Pitung</td>
-                    <td>FE 7</td>
-                    <td>Graduated</td>
-                    <td>Informatics</td>
-                    <td>Male</td>
-                    <td><AiFillFolderOpen /></td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Si Pitung</td>
-                    <td>FE 7</td>
-                    <td>Graduated</td>
-                    <td>Informatics</td>
-                    <td>Male</td>
-                    <td><AiFillFolderOpen /></td>
-                    <td><BiEditAlt /></td>
-                    <td><MdDeleteOutline /></td>
-                  </tr>
+                  {menteeList.map((obj, index) => {
+                    const { nama_mentee, class_id, status, type, gender } = obj;
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{nama_mentee}</td>
+                        <td>{class_id}</td>
+                        <td>{status}</td>
+                        <td>{type}</td>
+                        <td>{gender}</td>
+                        <td><AiFillFolderOpen /></td>
+                        <td><BiEditAlt /></td>
+                        <td><MdDeleteOutline onClick={() => handleDelete(obj)} /></td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </Table>
             </div>
