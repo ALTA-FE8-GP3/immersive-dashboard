@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { InputGroup, Form, Button, Table, Pagination } from "react-bootstrap";
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
+import { getCookie } from "cookies-next";
 // Components
 import { useThemeContext } from "../../context/contextTheme";
 import SubNavbar from '../../components/SubNavbar'
