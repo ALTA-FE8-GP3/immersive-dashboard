@@ -9,8 +9,8 @@ import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
 
 export const getServerSideProps = async (context) => {
-  const token = getCookie("token",context)
-  const role = getCookie("role",context)
+  const token = getCookie("token", context)
+  const role = getCookie("role", context)
   const response = await fetch(`https://grupproject.site/users`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -20,7 +20,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       userList: userList,
-      role : role
+      role: role
     },
   };
 };
@@ -30,20 +30,10 @@ const Index = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(props);
 
-  
-  // Initiate State
-
-  // const role = getCookie("role")
-  // const [role, setRole] = useState();
-  // useEffect(() => {
-  //   setRole(getCookie("role"))
-  // }, [])
-  
+  // Initiate State  
   const [edit, setEdit] = useState();
   const [userList, setUserList] = useState([]);
-  const [query,setQuery] = useState("")
   const [user, setUser] = useState({
     nama_user: "",
     email: "",
