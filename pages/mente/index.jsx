@@ -118,24 +118,26 @@ const Index = () => {
                   </Form.Select>
                 </Col>
                 <Col sm className='py-2'>
-                  <DropdownButton id='dropdown-basic-button' title='All Status' size='sm' variant='secondary'>
-                    <Dropdown.Item href='#/action-1'>Interview</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Join Class</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Unit 1</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Unit 2</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Unit 3</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Repeat Unit 1</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Repeat Unit 2</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Repeat Unit 3</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Placement</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Eliminated</Dropdown.Item>
-                    <Dropdown.Item href='#/action-1'>Graduated</Dropdown.Item>
-                  </DropdownButton>
+                  <Form.Select name='status'>
+                    <option>All status</option>
+                    <option value="Interview">Interview</option>
+                    <option value="Join Class">Join Class</option>
+                    <option value="Unit 1">Unit 1</option>
+                    <option value="Unit 2">Unit 2</option>
+                    <option value="Unit 3">Unit 3</option>
+                    <option value="Repeat Unit 1">Repeat Unit 1</option>
+                    <option value="Repeat Unit 2">Repeat Unit 2</option>
+                    <option value="Repeat Unit 3">Repeat Unit 3</option>
+                    <option value="Placement">Placement</option>
+                    <option value="Eliminated">Eliminated</option>
+                    <option value="Graduated">Graduated</option>
+                  </Form.Select>
                 </Col>
                 <Col sm className='py-2'>
                   <Form.Select size='sm'>
+                    <option>All Category</option>
                     <option value="IT">IT</option>
-                    <option value="IT">Non-IT</option>
+                    <option value="Non-IT">Non-IT</option>
                   </Form.Select>
                 </Col>
                 <Col sm className='py-2'>
