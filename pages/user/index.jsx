@@ -8,16 +8,6 @@ import { getCookie } from "cookies-next"
 import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
 
-// export const getServerSideProps = async () => {
-//   const response = await axios.get(`https://grupproject.site/users`)
-//   const userList = response
-//   return {
-//     props: {
-//       userList: userList
-//     }
-//   }
-// }
-
 const Index = () => {
   // Dont distract
   const [show, setShow] = useState(false);
@@ -28,6 +18,7 @@ const Index = () => {
   const ROLE = getCookie("role")
   const [edit, setEdit] = useState();
   const [userList, setUserList] = useState([]);
+  const [query,setQuery] = useState("")
   const [user, setUser] = useState({
     nama_user: "",
     email: "",
@@ -108,6 +99,7 @@ const Index = () => {
                   Search
                 </InputGroup.Text>
                 <Form.Control
+                  onChange={(e) => handleQuery(e)}
                   placeholder="search here..."
                   aria-label="Search"
                   aria-describedby="basic-addon1"

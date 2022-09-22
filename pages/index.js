@@ -10,7 +10,10 @@ const Index = () => {
     email: "",
     password: "",
   });
-  console.log(user.email, user.password);
+  const [token, setToken] = useState()
+  useEffect(() => {
+    setToken(getCookie("token"))
+  })
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -65,11 +68,21 @@ const Index = () => {
           />
         </Col>
         <Col xl={6} className="mt-5">
-          <Forms
-            user={user}
-            handleLogin={handleLogin}
-            inputLogin={inputLogin}
-          />
+          {token ?
+            <div>
+              <div>
+                <h1 className="text-center w-75 mx-auto fw-bold" style={{ color: "#17345F" }}>Welcome to <span style={{ color: "#F47624" }}>Immersive Dashboard</span></h1>
+                <img src="/landing.png" width={350} height={300} className="mx-auto d-block" />
+              </div>
+            </div> : <Forms
+              user={user}
+              handleLogin={handleLogin}
+              inputLogin={inputLogin}
+            />
+          }
+
+
+
         </Col>
       </Row>
     </>
