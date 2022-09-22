@@ -33,7 +33,7 @@ const Navbars = () => {
                 <Navbar bg={isDark ? "dark" : "light"} expand="lg" className="shadow-sm border-bottom border-light navbar">
                     <Container fluid className="d-md-flex align-items-center justify-content-between">
                         <Navbar.Brand href="/" className="ms-5 ps-5 me-0">
-                            <img src={isDark ? "/logo-2.png" : "/logo.png"} style={{ maxWidth: 100, maxHeight: 100 }} onClick={() => navigate('/')}></img>{' '}
+                            <img alt="" src={isDark ? "/logo-2.png" : "/logo.png"} style={{ maxWidth: 100, maxHeight: 100 }} onClick={() => navigate('/')}></img>{' '}
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="navbarScroll" />
                         <Navbar.Collapse id="navbarScroll" className="align-items-center justify-content-center">
