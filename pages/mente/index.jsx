@@ -4,7 +4,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr"
 import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { AiFillFolderOpen } from "react-icons/ai";
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import axios from 'axios';
 // import components
 import SubNavbar from '../../components/SubNavbar'
@@ -150,7 +150,7 @@ const Index = () => {
                   {menteeList.map((obj, index) => {
                     const { nama_mentee, class_id, status, type, gender } = obj;
                     return (
-                      <tr key={index}>
+                      <tr key={index} onClick={goLog}>
                         <td>{index + 1}</td>
                         <td>{nama_mentee}</td>
                         <td>{class_id}</td>
