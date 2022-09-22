@@ -5,11 +5,14 @@ import { MdDeleteOutline } from "react-icons/md";
 import { Button, Form, InputGroup, Pagination, Table } from "react-bootstrap";
 import { getCookie } from "cookies-next";
 // Import Components
+import "../../styles/Home.module.css"
 import SubNavbar from "../../components/SubNavbar";
 import AddModal from "../../components/AddModal";
+import { useThemeContext } from "../../context/contextTheme";
 
 const Index = () => {
   // Dont distract
+  const { isDark } = useThemeContext()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -92,13 +95,12 @@ const Index = () => {
   };
 
   return (
-    console.log(userList),
     <>
-      <div style={{ backgroundColor: "#F9F9F9" }}>
+      <div >
         <div>
-          <div className="px-3">
+          <div className={isDark ? "bg-dark text-white px-3" : "px-3"}>
             <SubNavbar title="User List" />
-            <div className="bg-white mt-3 p-4">
+            <div className={`mt-3 p-4 ${isDark ? "bg-dark text-white" : ''} `}>
               <InputGroup style={{ width: "300px" }}>
                 <InputGroup.Text
                   id="basic-addon1"
@@ -130,7 +132,7 @@ const Index = () => {
                 )}
               </div>
               <div style={{ paddingTop: "30px" }}>
-                <Table responsive>
+                <Table responsive className={isDark ? "text-white" : ""}>
                   <thead>
                     <tr>
                       <th>No.</th>

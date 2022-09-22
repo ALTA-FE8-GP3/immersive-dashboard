@@ -5,9 +5,11 @@ import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { AiFillFolderOpen } from "react-icons/ai";
 import Router from 'next/router';
+import { useThemeContext } from "../../context/contextTheme";
 
 const Index = () => {
 
+  const { isDark } = useThemeContext()
   const [allClass, setAllClass] = useState([]);
 
   const buttonAddStyle = {
@@ -57,13 +59,13 @@ const Index = () => {
   }, []);
 
   return (
-    <div style={{ backgroundColor: '#F9F9F9' }}>
+    <div className={isDark ? "bg-dark text-white px-3" : "px-3"} style={{ backgroundColor: '#F9F9F9' }}>
       <div>
         <div className='px-3'>
           <SubNavbar
             title="Mentee List"
           />
-          <div className='bg-white mt-3 p-4'>
+          <div className={isDark ? "bg-dark text-white p-4 mt-3" : "p-4 mt-3"}> 
             <InputGroup style={{ width: '300px' }}>
               <InputGroup.Text id='basic-addon1' style={{ backgroundColor: '#17345F', color: 'white' }}>Search</InputGroup.Text>
               <Form.Control
@@ -114,7 +116,7 @@ const Index = () => {
               </Row>
             </div>
             <div>
-              <Table responsive>
+              <Table className={isDark ? "text-white" : ""} responsive>
                 <thead>
                   <tr>
                     <th>No.</th>

@@ -4,6 +4,7 @@ import { BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { getCookie } from "cookies-next";
 // Components
+import { useThemeContext } from "../../context/contextTheme";
 import SubNavbar from '../../components/SubNavbar'
 import AddModal from '../../components/AddModal';
 import axios from 'axios';
@@ -11,6 +12,7 @@ import axios from 'axios';
 const Index = () => {
 
   // Dont distract
+  const { isDark } = useThemeContext()
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -119,13 +121,13 @@ const Index = () => {
   }
 
   return (
-    <div style={{ backgroundColor: '#F9F9F9' }}>
+    <div style={{ backgroundColor: '#F9F9F9',minHeight : "100vh" }} className={isDark ? "bg-dark text-white" : ""}>
       <div>
         <div className='px-3'>
           <SubNavbar
             title="Class List"
           />
-          <div className='bg-white mt-3 p-4'>
+          <div className={isDark ? "bg-dark text-white p-4 mt-3" : "p-4 mt-3"}>
             <InputGroup style={{ width: '300px' }}>
               <InputGroup.Text id='basic-addon1' style={{ backgroundColor: '#17345F', color: 'white' }}>Search</InputGroup.Text>
               <Form.Control
